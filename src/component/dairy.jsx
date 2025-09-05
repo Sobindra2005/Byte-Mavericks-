@@ -183,8 +183,8 @@ const Diary = () => {
               key={tab.key}
               className={`px-6 py-2 mx-1 rounded font-semibold transition-colors duration-200
                 ${activePanel === tab.key
-                  ? "bg-green-100 text-green-700 shadow"
-                  : "bg-white text-gray-700 border hover:bg-gray-100"
+                  ? "bg-green-100 text-green-700 "
+                  : "bg-white text-gray-700  hover:bg-gray-100"
                 }`}
               onClick={() => setActivePanel(tab.key)}
             >
@@ -196,7 +196,7 @@ const Diary = () => {
         {/* Dashboard Panel */}
         {activePanel === "dashboard" && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            <div className="bg-white rounded-xl shadow p-6 border">
+            <div className="bg-white rounded-xl shadow p-6 ">
               <h2 className="text-lg font-bold text-gray-700 mb-2">Revenue vs Expenses</h2>
               <p className="text-gray-500 text-sm mb-2">Distribution of your financial activity</p>
               <Pie data={pieData} />
@@ -205,7 +205,7 @@ const Diary = () => {
                 <span className="flex items-center gap-1 text-red-500 text-sm"><span className="w-3 h-3 bg-red-500 rounded-full inline-block"></span> Expenses</span>
               </div>
             </div>
-            <div className="bg-white rounded-xl shadow p-6 border">
+            <div className="bg-white rounded-xl shadow p-6 ">
               <h2 className="text-lg font-bold text-gray-700 mb-2">Monthly Financial Trend</h2>
               <p className="text-gray-500 text-sm mb-2">Revenue and expenses over time</p>
               <Line data={lineData} />
@@ -219,15 +219,15 @@ const Diary = () => {
 
         {/* Transactions Panel */}
         {activePanel === "transactions" && (
-          <div className="bg-white rounded-xl shadow p-4 mb-8 border">
+          <div className="bg-white rounded-xl shadow p-4 mb-8 ">
             <h2 className="text-lg font-bold text-gray-700 mb-4">Transactions</h2>
             {plans && plans.length > 0 ? (
               plans.map((plan, index) => (
                 <div
                   key={index}
-                  className="flex items-center justify-between border-b last:border-b-0 py-3 hover:bg-gray-50 transition"
+                  className="flex items-center justify-between  py-3 hover:bg-gray-50 transition"
                 >
-                  <Link className="flex items-center flex-1" to={`/business-diary/${plan._id}`}>
+                  <Link className="flex items-center flex-1" to={`diary/${plan._id}`}>
                     <FaCalendarAlt className="text-green-500 mr-3 text-xl" />
                     <div>
                       <h3 className="text-base font-medium text-gray-800">{plan.plan}</h3>
@@ -258,7 +258,7 @@ const Diary = () => {
 
         {/* Investments Panel */}
         {activePanel === "investments" && (
-          <div className="bg-white rounded-xl shadow p-4 mb-8 border">
+          <div className="bg-white rounded-xl shadow p-4 mb-8 ">
             <h2 className="text-lg font-bold text-gray-700 mb-4">Investments</h2>
             <p className="text-center text-gray-400 py-8">No investment data available.</p>
           </div>
@@ -266,7 +266,7 @@ const Diary = () => {
 
         {/* Analytics Panel */}
         {activePanel === "analytics" && (
-          <div className="bg-white rounded-xl shadow p-4 mb-8 border">
+          <div className="bg-white rounded-xl shadow p-4 mb-8 ">
             <h2 className="text-lg font-bold text-gray-700 mb-4">Analytics</h2>
             <p className="text-center text-gray-400 py-8">Analytics coming soon.</p>
           </div>
@@ -282,7 +282,7 @@ const Diary = () => {
             Add New Plan
           </button>
         </div>
-        <div className="bg-white rounded-xl shadow p-4 border">
+        <div className="bg-white rounded-xl shadow p-4 ">
           {plans && plans.length > 0 ? (
             plans.map((plan, index) => (
               <div
