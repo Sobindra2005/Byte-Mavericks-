@@ -12,10 +12,12 @@ const Home = () => {
       <div className="absolute inset-0  bg-opacity-40"></div>
     
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">
+        
         <h2 className="text-5xl font-bold m-2">
           {useTextLang("Are you interested", "के तपाईं कृषिमा रुचि राख्नुहुन्छ?")}
           
         </h2>
+        <h1 className='text-4xl font-bold'>आजको खेती, भोलिको भविष्य।</h1>
         <p className="text-2xl m-2">यदि तपाइँ इच्छुक हुनुहुन्छ भने</p>
         <Link
           to="/courses"
