@@ -1,14 +1,17 @@
 
-import { Routes } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 import './App.css'
-import MainLayout from './layout'
+import MainLayout from './component/layout/layout'
+import Diary from './component/dairy'
+import RegionalCrops from './component/RegionalCrops/regionalCrops'
 
 function App() {
   return (
     <>
       <MainLayout>
         <Routes>
-          {/* <Route path="/" element={isLoggedIn ? <Course /> : <Home />} /> */}
+          <Route path="/diary" element={<Diary /> } />
+          <Route path="/regional-crops" element={<RegionalCrops /> } />
         </Routes>
       </MainLayout>
     </>
