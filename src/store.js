@@ -1,7 +1,7 @@
 import { create } from "zustand";
 
 const useStore = create((set) => ({
-  language: "en",
+  language: "np",
   setLanguage: () =>
     set((state) => ({
       language: state.language === "en" ? "np" : "en",
