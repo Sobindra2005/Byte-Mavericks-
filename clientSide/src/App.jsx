@@ -11,6 +11,7 @@ import Player from './component/courses/player'
 import Signin from './component/signin'
 import Dashboard from './component/dashboard'
 import Community from './community/community'
+import HowToPlant from './component/courses/HowToPlant'
 import DiseaseDetection from './component/DiseaseDetection'
 
 import Marketplace from './component/Marketplace'
@@ -25,6 +26,7 @@ function App() {
           <Route path="/regional-crops" element={<RegionalCrops />} />
           <Route path="/courses" element={<Course />} />
           <Route path="/courses/player/:id" element={<Player />} />
+          <Route path="/courses/player/:id/cultivation" element={<HowToPlant />} />
           <Route path="/signin" element={<Signin/>}/>
           <Route path="/dashboard" element={<Dashboard/>}/>
           <Route path="/community" element={<Community/>} />
