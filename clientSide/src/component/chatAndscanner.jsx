@@ -5,63 +5,141 @@ import iconScanner from "../assets/animations/iconscanner.json";
 import chat from "../assets/animations/chat.json";
 import { AnimatePresence, motion } from "framer-motion";
 import axios from "axios";
+import ReactMarkdown from "react-markdown";
 
-const ChatPopup = ({ onClose }) => (
-  <motion.div
-    initial={{ x: 400, opacity: 0 }}
-    animate={{ x: 0, opacity: 1 }}
-    exit={{ x: 400, opacity: 0 }}
-    transition={{ type: "spring", stiffness: 300, damping: 30 }}
-    className="fixed top-0 right-0 h-full w-[40%] bg-white shadow-2xl z-50 flex flex-col"
-    style={{
-      borderTopRightRadius: "1.5rem",
-      borderBottomRightRadius: "1.5rem",
-    }}
-  >
-    <div className="flex items-center justify-between px-4 py-3 bg-green-700 text-white rounded-tl-2xl">
-      <span className="font-bold text-lg">कृषि च्याट</span>
-      <button
-        onClick={onClose}
-        className="text-white text-2xl font-bold hover:text-green-300"
-        aria-label="Close chat"
-      >
-        ×
-      </button>
-    </div>
-    <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-green-50">
-      {/* Example chat messages */}
-      <div className="bg-green-100 rounded-lg p-2 self-start max-w-[80%]">
-        नमस्ते! तपाईंलाई के सहयोग चाहियो?
+const ChatPopup = ({ onClose }) => {
+  const [messages, setMessages] = useState([
+    { from: "ai", text: "नमस्ते! तपाईंलाई के सहयोग चाहियो?" }
+  ]);
+  const [input, setInput] = useState("cauliflower ma kalo dag aako thiyo k ley hola ");
+  const [loading, setLoading] = useState(false);
+  const messagesEndRef = useRef(null);
+
+  // Scroll to bottom on new message
+  React.useEffect(() => {
+    if (messagesEndRef.current) {
+      messagesEndRef.current.scrollIntoView({ behavior: "smooth" });
+    }
+  }, [messages]);
+
+  const sendMessage = async (e) => {
+    e.preventDefault();
+    if (!input.trim()) return;
+
+    const userMsg = { from: "user", text: input };
+    setMessages((msgs) => [...msgs, userMsg]);
+    setInput("");
+    setLoading(true);
+
+    try {
+      const response = await fetch("http://localhost:3000/chat/", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ input }),
+      });
+
+      const data = await response.json();
+      const aiMsg = { from: "ai", text: data.response };
+
+      setMessages((msgs) => [...msgs, aiMsg]);
+
+    } catch (err) {
+      setMessages((msgs) => [
+        ...msgs,
+        { from: "ai", text: "Failed to get response from AI." },
+      ]);
+    }
+    setLoading(false);
+};
+
+  return (
+    <motion.div
+      initial={{ x: 400, opacity: 0 }}
+      animate={{ x: 0, opacity: 1 }}
+      exit={{ x: 400, opacity: 0 }}
+      transition={{ type: "spring", stiffness: 300, damping: 30 }}
+      className="fixed top-0 right-0 h-full w-[40%] bg-white shadow-2xl z-50 flex flex-col"
+      style={{
+        borderTopRightRadius: "1.5rem",
+        borderBottomRightRadius: "1.5rem",
+      }}
+    >
+      <div className="flex items-center justify-between px-4 py-3 bg-green-700 text-white rounded-tl-2xl">
+        <span className="font-bold text-lg">कृषि च्याट</span>
+        <button
+          onClick={onClose}
+          className="text-white text-2xl font-bold hover:text-green-300"
+          aria-label="Close chat"
+        >
+          ×
+        </button>
       </div>
-      <div className="bg-green-200 rounded-lg p-2 self-end max-w-[80%] ml-auto">
-        मलाई बालीको जानकारी चाहियो।
+      <div className="flex-1 p-4 overflow-y-auto space-y-3 bg-green-50">
+        {messages.map((msg, idx) => (
+          <div
+            key={idx}
+            className={`rounded-lg p-2 max-w-[80%] ${msg.from === "ai"
+              ? "bg-green-100 self-start"
+              : "bg-green-200 self-end ml-auto"
+              }`}
+          >
+            {msg.from === "ai" ? (
+              <ReactMarkdown
+                components={{
+                  code({ node, inline, className, children, ...props }) {
+                    return (
+                      <code
+                        className={`bg-gray-200 px-1 rounded text-sm ${className || ""}`}
+                        {...props}
+                      >
+                        {children}
+                      </code>
+                    );
+                  }
+                }}
+              >
+                {msg.text}
+              </ReactMarkdown>
+            ) : (
+              msg.text
+            )}
+          </div>
+        ))}
+        <div ref={messagesEndRef} />
+        {loading && (
+          <div className="text-green-600 text-sm">AI is typing...</div>
+        )}
       </div>
-    </div>
-    <form className="p-3 flex gap-2 border-t bg-white">
-      <input
-        type="text"
-        placeholder="यहाँ लेख्नुहोस्..."
-        className="flex-1 border rounded-full px-4 py-2 focus:outline-none"
-      />
-      <button
-        type="submit"
-        className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-full font-semibold"
-      >
-        पठाउनुहोस्
-      </button>
-    </form>
-  </motion.div>
-);
+      <form className="p-3 flex gap-2 border-t bg-white" onSubmit={sendMessage}>
+        <input
+          type="text"
+          placeholder="यहाँ लेख्नुहोस्..."
+          className="flex-1 border rounded-full px-4 py-2 focus:outline-none"
+          value={input}
+          onChange={(e) => setInput(e.target.value)}
+          disabled={loading}
+        />
+        <button
+          type="submit"
+          className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-full font-semibold"
+          disabled={loading}
+        >
+          पठाउनुहोस्
+        </button>
+      </form>
+    </motion.div>
+  );
+};
 
 // DiseaseResult component with global language toggle
 const DiseaseResult = ({ image, loading, result, onTryAnother }) => {
   const language = useStore((state) => state.language);
   const setLanguage = useStore((state) => state.setLanguage);
-  
+
   // Map language code to result key
   const langKey = language === "en" ? "english" : "nepali";
   const info = result && result[langKey];
-  
+
   return (
     <div className="flex flex-col items-center gap-4">
       {image && <img src={image} alt="Selected" className="max-h-48 rounded shadow" />}
@@ -302,7 +380,7 @@ const DiseasePopup = ({ onClose }) => {
 const ChatAndScanner = () => {
   const [showDisease, setShowDisease] = useState(false);
   const [showChat, setShowChat] = useState(false);
-  
+
   return (
     <div>
       <AnimatePresence>
