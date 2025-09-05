@@ -12,17 +12,15 @@ import Player from './component/courses/player'
 function App() {
   return (
     <>
-    <Course />
+    
        <MainLayout>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
           <Route path="/diary" element={<Diary />} />
           <Route path="/regional-crops" element={<RegionalCrops />} />
-          <Route
-            path="/courses/player/:id"
-            element={ <Player />}
-          />
+          <Route path="/courses" element={<Course />} />
+          <Route path="/courses/player/:id" element={<Player />} />
         </Routes>
       </MainLayout> 
         
