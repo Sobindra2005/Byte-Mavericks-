@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from "react";
 import { Pie, Line } from "react-chartjs-2";
-// import { createItem, getItems, deleteItem } from "../../api/api";
 import { FaCalendarAlt, FaEdit, FaTrash } from "react-icons/fa";
 import {
   Chart as ChartJS,
@@ -26,16 +25,64 @@ ChartJS.register(
 );
 import { useTextLang } from "../libs/utils"
 
-
-
 const Diary = () => {
   const [activePanel, setActivePanel] = useState("dashboard");
   const [create, setCreate] = useState(false);
-  const [newPlan, setNewPlan] = useState({ plan: "", email: `` });
-  const [plans, setPlans] = useState([]);
+  const [newPlan, setNewPlan] = useState({ plan: "", description: "", amount: "", date: "", type: "" });
+  const [plans, setPlans] = useState([
+    {
+      _id: "1",
+      plan: "Buy Seeds",
+      description: "Purchase hybrid rice seeds for next season",
+      amount: "5000",
+      date: "2025-09-01",
+      type: "expense",
+    },
+    {
+      _id: "2",
+      plan: "Sell Wheat",
+      description: "Sold 1000kg wheat to local market",
+      amount: "25000",
+      date: "2025-09-03",
+      type: "income",
+    },
+    {
+      _id: "3",
+      plan: "Fertilizer Purchase",
+      description: "Buy organic fertilizer for field",
+      amount: "3000",
+      date: "2025-09-05",
+      type: "expense",
+    },
+    {
+      _id: "4",
+      plan: "Tractor Maintenance",
+      description: "Annual maintenance of tractor",
+      amount: "2000",
+      date: "2025-09-07",
+      type: "expense",
+    },
+    {
+      _id: "5",
+      plan: "Invest in Drip Irrigation",
+      description: "Install drip irrigation system for vegetable plot",
+      amount: "12000",
+      date: "2025-09-10",
+      type: "investment",
+    },
+    {
+      _id: "6",
+      plan: "Sell Vegetables",
+      description: "Sold tomatoes and cucumbers at city market",
+      amount: "8000",
+      date: "2025-09-12",
+      type: "income",
+    },
+  ]);
   const [updatedPlan, setUpdatedPlan] = useState({ plan: "" });
   const [isEditing, setIsEditing] = useState(null);
 
+  // Labels
   const addNewPlanLabel = useTextLang("Add New Plan", "नयाँ योजना थप्नुहोस्");
   const planNameLabel = useTextLang("Plan Name", "योजना नाम");
   const descriptionLabel = useTextLang("Description", "विवरण");
@@ -50,72 +97,35 @@ const Diary = () => {
   const cancelLabel = useTextLang("Cancel", "रद्द गर्नुहोस्");
   const addPlanLabel = useTextLang("Add Plan", "योजना थप्नुहोस्");
 
-  const pieData = {
-    labels: ["Income", "Expenses"],
-    datasets: [
-      {
-        label: "Rs.",
-        data: [300, 50],
-        backgroundColor: ["#22c55e", "#ef4444"],
-        borderColor: ["#16a34a", "#dc2626"],
-        borderWidth: 1,
-      },
-    ],
-  };
+  // Dashboard labels
+  const revenueVsExpensesLabel = useTextLang("Revenue vs Expenses", "आय र खर्च");
+  const distributionLabel = useTextLang("Distribution of your financial activity", "तपाईंको वित्तीय गतिविधिको वितरण");
+  const incomeLabelShort = useTextLang("Income", "आय");
+  const expensesLabelShort = useTextLang("Expenses", "खर्च");
+  const monthlyTrendLabel = useTextLang("Monthly Financial Trend", "महिनावारी वित्तीय प्रवृत्ति");
+  const trendDescLabel = useTextLang("Revenue and expenses over time", "समयको साथमा आय र खर्च");
+  const transactionsPanelLabel = useTextLang("Transactions", "कारोबारहरू");
+  const noTransactionsLabel = useTextLang("No transactions found.", "कोई कारोबार नहीं मिला।");
+  const investmentsPanelLabel = useTextLang("Investments", "निवेशहरू");
+  const noInvestmentsLabel = useTextLang("No investment data available.", "कोई निवेश डेटा उपलब्ध नहीं है।");
+  const analyticsPanelLabel = useTextLang("Analytics", "विश्लेषण");
+  const analyticsComingLabel = useTextLang("Analytics coming soon.", "विश्लेषण चाँडै आउनेछ।");
+  const allPlansLabel = useTextLang("All Plans", "सबै योजनाहरू");
+  const addNewPlanBtnLabel = useTextLang("Add New Plan", "नयाँ योजना थप्नुहोस्");
+  const noPlansFoundLabel = useTextLang("No plans found.", "कोई योजना नहीं मिली।");
 
-  const lineData = {
-    labels: useTextLang(["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"], ["जनवरी", "फेब्रुअरी", "मार्च", "अप्रिल", "मई", "जुन", "जुलाई"]),
-    datasets: [
-      {
-        label: useTextLang("Income", "आम्दानी"),
-        data: [65, 59, 80, 81, 56, 55, 40],
-        fill: false,
-        borderColor: "#22c55e",
-      },
-      {
-        label: useTextLang("Expenses", "खर्च"),
-        data: [28, 48, 40, 19, 86, 27, 90],
-        fill: false,
-        borderColor: "#ef4444",
-      },
-    ],
-  };
+  // Tabs
+  const dashboardLabel = useTextLang("Dashboard", "ड्यासबोर्ड");
+  const transactionsLabel = useTextLang("Transactions", "कारोबारहरू");
+  const investmentsLabel = useTextLang("Investments", "लगानीहरू");
+  const analyticsLabel = useTextLang("Analytics", "विश्लेषण");
 
-  function updateEmail() {
-    // return getCurrentUser().then((user) => {
-    //   setNewPlan((prevPlan) => ({ ...prevPlan, email: user.email }));
-    // });
-  }
-
-  const handleDeletePlan = async (id) => {
-    // await deleteItem(`deletePlan/${id}`);
-    // fetchBusinessPlans()
-    //   .then((response) => setPlans(response))
-    //   .catch((error) => console.error("Error fetching business plans:", error));
-  };
-
-  const handleBusinessPlan = async () => {
-    // await updateEmail();
-    // setTimeout(async () => {
-    //   await createItem("createPlan", newPlan);
-    //   fetchBusinessPlans()
-    //     .then((response) => setPlans(response))
-    //     .catch((error) => console.error("Error fetching business plans:", error));
-    //   setCreate(false);
-    // }, 0);
-  };
-
-  const fetchBusinessPlans = async () => {
-    // const userData = await getCurrentUser();
-    // const response = await getItems(`readPlans/${userData.email}`);
-    // return response;
-  };
-
-  useEffect(() => {
-    // fetchBusinessPlans()
-    //   .then((response) => setPlans(response))
-    //   .catch((error) => console.error("Error fetching business plans:", error));
-  }, []);
+  const tabs = [
+    { key: "dashboard", label: dashboardLabel },
+    { key: "transactions", label: transactionsLabel },
+    { key: "investments", label: investmentsLabel },
+    { key: "analytics", label: analyticsLabel },
+  ];
 
   // Example summary data (replace with real data)
   const rsLabel = useTextLang("Rs.", "₹");
@@ -174,38 +184,88 @@ const Diary = () => {
     },
   ];
 
-  const dashboardLabel = useTextLang("Dashboard", "ड्यासबोर्ड");
-  const transactionsLabel = useTextLang("Transactions", "कारोबारहरू");
-  const investmentsLabel = useTextLang("Investments", "लगानीहरू");
-  const analyticsLabel = useTextLang("Analytics", "विश्लेषण");
+  // Chart data (static for demo)
+  const pieData = {
+    labels: [incomeLabelShort, expensesLabelShort],
+    datasets: [
+      {
+        label: rsLabel,
+        data: [
+          plans.filter((p) => p.type === "income").reduce((a, b) => a + Number(b.amount || 0), 0),
+          plans.filter((p) => p.type === "expense").reduce((a, b) => a + Number(b.amount || 0), 0),
+        ],
+        backgroundColor: ["#22c55e", "#ef4444"],
+        borderColor: ["#16a34a", "#dc2626"],
+        borderWidth: 1,
+      },
+    ],
+  };
 
-  const tabs = [
-    { key: "dashboard", label: dashboardLabel },
-    { key: "transactions", label: transactionsLabel },
-    { key: "investments", label: investmentsLabel },
-    { key: "analytics", label: analyticsLabel },
-  ];
+  const lineData = {
+    labels: useTextLang(
+      ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul"],
+      ["जनवरी", "फेब्रुअरी", "मार्च", "अप्रिल", "मई", "जुन", "जुलाई"]
+    ),
+    datasets: [
+      {
+        label: incomeLabelShort,
+        data: [65, 59, 80, 81, 56, 55, 40],
+        fill: false,
+        borderColor: "#22c55e",
+      },
+      {
+        label: expensesLabelShort,
+        data: [28, 48, 40, 19, 86, 27, 90],
+        fill: false,
+        borderColor: "#ef4444",
+      },
+    ],
+  };
 
-  const revenueVsExpensesLabel = useTextLang("Revenue vs Expenses", "आय र खर्च");
-  const distributionLabel = useTextLang("Distribution of your financial activity", "तपाईंको वित्तीय गतिविधिको वितरण");
-  const incomeLabelShort = useTextLang("Income", "आय");
-  const expensesLabelShort = useTextLang("Expenses", "खर्च");
-  const monthlyTrendLabel = useTextLang("Monthly Financial Trend", "महिनावारी वित्तीय प्रवृत्ति");
-  const trendDescLabel = useTextLang("Revenue and expenses over time", "समयको साथमा आय र खर्च");
-  const transactionsPanelLabel = useTextLang("Transactions", "कारोबारहरू");
-  const noTransactionsLabel = useTextLang("No transactions found.", "कोई कारोबार नहीं मिला।");
-  const investmentsPanelLabel = useTextLang("Investments", "निवेशहरू");
-  const noInvestmentsLabel = useTextLang("No investment data available.", "कोई निवेश डेटा उपलब्ध नहीं है।");
-  const analyticsPanelLabel = useTextLang("Analytics", "विश्लेषण");
-  const analyticsComingLabel = useTextLang("Analytics coming soon.", "विश्लेषण चाँडै आउनेछ।");
+  // Add new plan
+  const handleBusinessPlan = () => {
+    if (!newPlan.plan) return;
+    setPlans((prev) => [
+      ...prev,
+      {
+        ...newPlan,
+        _id: Date.now().toString(),
+      },
+    ]);
+    setNewPlan({ plan: "", description: "", amount: "", date: "", type: "" });
+    setCreate(false);
+  };
 
+  const investmentPlans = plans.filter((plan) => plan.type === "investment");
+
+  // Edit plan
+  const handleUpdatePlan = () => {
+    setPlans((prev) =>
+      prev.map((plan, idx) =>
+        idx === isEditing ? { ...plan, ...updatedPlan } : plan
+      )
+    );
+    setIsEditing(null);
+  };
+
+  // Delete plan
+  const handleDeletePlan = (id) => {
+    setPlans((prev) => prev.filter((plan) => plan._id !== id));
+  };
 
   return (
     <div className="min-h-screen bg-[#fafbfc] py-8 px-2">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <h1 className="text-3xl font-extrabold text-gray-800 mb-2 text-center">{useTextLang("Farm & Business Financial Diary", "कृषि तथा व्यवसायिक वित्तीय डायरी")}</h1>
-        <p className="text-center text-gray-500 mb-8">{useTextLang("Track your agricultural and business finances with ease", "आफ्नो कृषि र व्यवसायको वित्तीय गतिविधिहरूलाई सजिलैसँग ट्र्याक गर्नुहोस्")}</p>
+        <h1 className="text-3xl font-extrabold text-gray-800 mb-2 text-center">
+          {useTextLang("Farm & Business Financial Diary", "कृषि तथा व्यवसायिक वित्तीय डायरी")}
+        </h1>
+        <p className="text-center text-gray-500 mb-8">
+          {useTextLang(
+            "Track your agricultural and business finances with ease",
+            "आफ्नो कृषि र व्यवसायको वित्तीय गतिविधिहरूलाई सजिलैसँग ट्र्याक गर्नुहोस्"
+          )}
+        </p>
 
         {/* Summary Cards */}
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8">
@@ -243,8 +303,9 @@ const Diary = () => {
               {tab.label}
             </button>
           ))}
-
         </div>
+
+        {/* Panels */}
         {activePanel === "dashboard" && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
             <div className="bg-white rounded-xl shadow p-6 ">
@@ -282,18 +343,22 @@ const Diary = () => {
             {plans && plans.length > 0 ? (
               plans.map((plan, index) => (
                 <div
-                  key={index}
+                  key={plan._id}
                   className="flex items-center justify-between  py-3 hover:bg-gray-50 transition"
                 >
                   <Link className="flex items-center flex-1" to={`diary/${plan._id}`}>
                     <FaCalendarAlt className="text-green-500 mr-3 text-xl" />
                     <div>
                       <h3 className="text-base font-medium text-gray-800">{plan.plan}</h3>
-                      <p className="text-xs text-gray-400">Date: ०१/०१/२०२४</p>
+                      <p className="text-xs text-gray-400">
+                        {plan.date ? `Date: ${plan.date}` : ""}
+                      </p>
                     </div>
                   </Link>
                   <div className="flex items-center space-x-3">
-                    <span className="font-semibold text-green-600">Rs.1000</span>
+                    <span className="font-semibold text-green-600">
+                      {plan.amount ? `${rsLabel}${plan.amount}` : ""}
+                    </span>
                     <FaEdit
                       className="text-blue-500 cursor-pointer hover:text-blue-700"
                       onClick={() => {
@@ -317,9 +382,46 @@ const Diary = () => {
         {activePanel === "investments" && (
           <div className="bg-white rounded-xl shadow p-4 mb-8 ">
             <h2 className="text-lg font-bold text-gray-700 mb-4">{investmentsPanelLabel}</h2>
-            <p className="text-center text-gray-400 py-8">{noInvestmentsLabel}</p>
+            {investmentPlans.length > 0 ? (
+              investmentPlans.map((plan, index) => (
+                <div
+                  key={plan._id}
+                  className="flex items-center justify-between border-b last:border-b-0 py-3 hover:bg-gray-50 transition"
+                >
+                  <div className="flex items-center flex-1">
+                    <FaCalendarAlt className="text-green-500 mr-3 text-xl" />
+                    <div>
+                      <h3 className="text-base font-medium text-gray-800">{plan.plan}</h3>
+                      <p className="text-xs text-gray-400">
+                        {plan.date ? `Date: ${plan.date}` : ""}
+                      </p>
+                      <p className="text-xs text-gray-500">{plan.description}</p>
+                    </div>
+                  </div>
+                  <div className="flex items-center space-x-3">
+                    <span className="font-semibold text-green-600">
+                      {plan.amount ? `${rsLabel}${plan.amount}` : ""}
+                    </span>
+                    <FaEdit
+                      className="text-blue-500 cursor-pointer hover:text-blue-700"
+                      onClick={() => {
+                        setIsEditing(plans.findIndex((p) => p._id === plan._id));
+                        setUpdatedPlan(plan);
+                      }}
+                    />
+                    <FaTrash
+                      className="text-red-500 cursor-pointer hover:text-red-700"
+                      onClick={() => handleDeletePlan(plan._id)}
+                    />
+                  </div>
+                </div>
+              ))
+            ) : (
+              <p className="text-center text-gray-400 py-8">{noInvestmentsLabel}</p>
+            )}
           </div>
         )}
+
 
         {activePanel === "analytics" && (
           <div className="bg-white rounded-xl shadow p-4 mb-8 ">
@@ -330,19 +432,19 @@ const Diary = () => {
 
         {/* All Plans Section */}
         <div className="flex items-center justify-between mb-4 mt-10">
-          <h2 className="text-lg font-bold text-gray-700">{useTextLang("All Plans", "सबै योजनाहरू")}</h2>
+          <h2 className="text-lg font-bold text-gray-700">{allPlansLabel}</h2>
           <button
             onClick={() => setCreate(true)}
             className="bg-green-600 hover:bg-green-700 text-white px-5 py-2 rounded-lg font-semibold shadow transition"
           >
-            {useTextLang("Add New Plan", "नयाँ योजना थप्नुहोस्")}
+            {addNewPlanBtnLabel}
           </button>
         </div>
         <div className="bg-white rounded-xl shadow p-4 ">
           {plans && plans.length > 0 ? (
             plans.map((plan, index) => (
               <div
-                key={index}
+                key={plan._id}
                 className="flex items-center justify-between border-b last:border-b-0 py-3 hover:bg-gray-50 transition"
               >
                 <Link className="flex items-center flex-1" to={`/business-diary/${plan._id}`}>
@@ -363,13 +465,15 @@ const Diary = () => {
                     ) : (
                       <h3 className="text-base font-medium text-gray-800">{plan.plan}</h3>
                     )}
-                    <p className="text-xs text-gray-400">Date: ०१/०१/२०२४</p>
+                    <p className="text-xs text-gray-400">
+                      {plan.date ? `Date: ${plan.date}` : ""}
+                    </p>
                   </div>
                 </Link>
                 <div className="flex items-center space-x-3">
                   {isEditing === index ? (
                     <button
-                      onClick={() => setIsEditing(null)}
+                      onClick={handleUpdatePlan}
                       className="bg-green-600 text-white px-3 py-1 rounded shadow"
                     >
                       Update
@@ -393,11 +497,9 @@ const Diary = () => {
               </div>
             ))
           ) : (
-            <p className="text-center text-gray-400 py-8">{useTextLang("No plans found.", "कोई योजना नहीं मिली।")}</p>
+            <p className="text-center text-gray-400 py-8">{noPlansFoundLabel}</p>
           )}
         </div>
-
-
 
         {/* Modal for New Plan */}
         {create && (
