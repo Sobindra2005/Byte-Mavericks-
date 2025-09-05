@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, {  useState } from "react";
 import { Pie, Line } from "react-chartjs-2";
 import { FaCalendarAlt, FaEdit, FaTrash } from "react-icons/fa";
 import {
@@ -254,13 +254,13 @@ const Diary = () => {
   };
 
   return (
-    <div className="min-h-screen bg-[#fafbfc] py-8 px-2">
+    <div className="min-h-screen bg-[#f7f9fb] py-8 px-3">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <h1 className="text-3xl font-extrabold text-gray-800 mb-2 text-center">
+        <h1 className="text-2xl md:text-3xl font-bold text-green-900 mb-1 text-center">
           {useTextLang("Farm & Business Financial Diary", "कृषि तथा व्यवसायिक वित्तीय डायरी")}
         </h1>
-        <p className="text-center text-gray-500 mb-8">
+        <p className="text-center text-gray-600 mb-8">
           {useTextLang(
             "Track your agricultural and business finances with ease",
             "आफ्नो कृषि र व्यवसायको वित्तीय गतिविधिहरूलाई सजिलैसँग ट्र्याक गर्नुहोस्"
@@ -272,7 +272,7 @@ const Diary = () => {
           {summary.map((item, idx) => (
             <div
               key={idx}
-              className={`rounded-2xl shadow border ${item.border} ${item.bg} p-6 flex flex-col justify-between min-h-[120px]`}
+              className={`rounded-xl border border-green-100 bg-white shadow-sm p-5 flex flex-col justify-between min-h-[120px]`}
             >
               <div className="flex items-center justify-between mb-2">
                 <span className="font-semibold text-gray-600">{item.label}</span>
@@ -293,10 +293,10 @@ const Diary = () => {
           {tabs.map((tab) => (
             <button
               key={tab.key}
-              className={`px-6 py-2 mx-1 rounded font-semibold transition-colors duration-200
+              className={`px-4 py-2 mx-1 rounded-full text-sm font-medium border transition-colors duration-200
         ${activePanel === tab.key
-                  ? "bg-green-100 text-green-700 "
-                  : "bg-white text-gray-700  hover:bg-gray-100"
+                  ? "bg-green-600 text-white border-green-600"
+                  : "bg-white text-gray-700 border-green-200 hover:bg-gray-50"
                 }`}
               onClick={() => setActivePanel(tab.key)}
             >
@@ -308,7 +308,7 @@ const Diary = () => {
         {/* Panels */}
         {activePanel === "dashboard" && (
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-12">
-            <div className="bg-white rounded-xl shadow p-6 ">
+            <div className="bg-white rounded-xl border border-green-100 shadow-sm p-5 ">
               <h2 className="text-lg font-bold text-gray-700 mb-2">{revenueVsExpensesLabel}</h2>
               <p className="text-gray-500 text-sm mb-2">{distributionLabel}</p>
               <Pie data={pieData} />
@@ -321,7 +321,7 @@ const Diary = () => {
                 </span>
               </div>
             </div>
-            <div className="bg-white rounded-xl shadow p-6 ">
+            <div className="bg-white rounded-xl border border-green-100 shadow-sm p-5 ">
               <h2 className="text-lg font-bold text-gray-700 mb-2">{monthlyTrendLabel}</h2>
               <p className="text-gray-500 text-sm mb-2">{trendDescLabel}</p>
               <Line data={lineData} />
@@ -338,13 +338,13 @@ const Diary = () => {
         )}
 
         {activePanel === "transactions" && (
-          <div className="bg-white rounded-xl shadow p-4 mb-8 ">
+          <div className="bg-white rounded-xl border border-green-100 shadow-sm p-4 mb-8 ">
             <h2 className="text-lg font-bold text-gray-700 mb-4">{transactionsPanelLabel}</h2>
             {plans && plans.length > 0 ? (
               plans.map((plan, index) => (
                 <div
                   key={plan._id}
-                  className="flex items-center justify-between  py-3 hover:bg-gray-50 transition"
+                  className="flex items-center justify-between border-b last:border-b-0 py-3 hover:bg-gray-50 transition"
                 >
                   <Link className="flex items-center flex-1" to={`diary/${plan._id}`}>
                     <FaCalendarAlt className="text-green-500 mr-3 text-xl" />
@@ -380,10 +380,10 @@ const Diary = () => {
         )}
 
         {activePanel === "investments" && (
-          <div className="bg-white rounded-xl shadow p-4 mb-8 ">
+          <div className="bg-white rounded-xl border border-green-100 shadow-sm p-4 mb-8 ">
             <h2 className="text-lg font-bold text-gray-700 mb-4">{investmentsPanelLabel}</h2>
             {investmentPlans.length > 0 ? (
-              investmentPlans.map((plan, index) => (
+              investmentPlans.map((plan) => (
                 <div
                   key={plan._id}
                   className="flex items-center justify-between border-b last:border-b-0 py-3 hover:bg-gray-50 transition"
@@ -424,7 +424,7 @@ const Diary = () => {
 
 
         {activePanel === "analytics" && (
-          <div className="bg-white rounded-xl shadow p-4 mb-8 ">
+          <div className="bg-white rounded-xl border border-green-100 shadow-sm p-4 mb-8 ">
             <h2 className="text-lg font-bold text-gray-700 mb-4">{analyticsPanelLabel}</h2>
             <p className="text-center text-gray-400 py-8">{analyticsComingLabel}</p>
           </div>
