@@ -15,7 +15,7 @@ const menuItems = [
 ];
 
 export default function Sidebar() {
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
 
   const toggleSidebar = () => setIsSidebarOpen((prev) => !prev);
 
@@ -49,7 +49,7 @@ export default function Sidebar() {
             className="hidden md:block ml-2 focus:outline-none"
             aria-label="Toggle sidebar"
           >
-            {isSidebarOpen ? <FiX size={22} /> : <FiMenu size={22} />}
+            {isSidebarOpen ? <FiX size={30} /> : <FiMenu size={32} />}
           </button>
         </div>
 
@@ -63,7 +63,7 @@ export default function Sidebar() {
                   ${isSidebarOpen ? 'ml-2 text-sm' : 'justify-center text-lg'}
                 `}
               >
-                <span className="mr-2 text-xl">{item.icon}</span>
+                <span className="mr-2 text-2xl">{item.icon}</span>
                 {isSidebarOpen && <span>{item.label}</span>}
               </Link>
             </li>
@@ -73,7 +73,7 @@ export default function Sidebar() {
 
       {/* Overlay for mobile */}
       {!isSidebarOpen && (
-        <div className="fixed inset-0 bg-black opacity-50 md:hidden z-30" onClick={toggleSidebar}></div>
+        <div className="fixed inset-0 bg-black text-2xl opacity-50 md:hidden z-30" onClick={toggleSidebar}></div>
       )}
     </>
   );

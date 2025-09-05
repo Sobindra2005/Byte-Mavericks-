@@ -10,6 +10,7 @@ import Course from './component/courses/course'
 import Player from './component/courses/player'
 import Signin from './component/signin'
 import Dashboard from './component/dashboard'
+import Community from './community/community'
 function App() {
   return (
     <>
@@ -23,6 +24,7 @@ function App() {
           <Route path="/courses/player/:id" element={<Player />} />
           <Route path="/signin" element={<Signin/>}/>
           <Route path="/dashboard" element={<Dashboard/>}/>
+          <Route path="/community" element={<Community/>} />
         </Routes>
       </MainLayout> 
         
