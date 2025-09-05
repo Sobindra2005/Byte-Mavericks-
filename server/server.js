@@ -1,8 +1,9 @@
 const express = require("express");
 const cors = require("cors");
 const path = require("path");
-
-const detectRoutes = require("./routes/detect");
+const detectRoutes = require('./routes/detect');
+const cropsRoutes = require('./routes/cropsSuggestion');
+const chatRoutes = require('./routes/chatSystem');
 
 const app = express();
 
@@ -15,10 +16,6 @@ app.use(
   })
 );
 
-// Middleware
-const path = require('path');
-const detectRoutes = require('./routes/detect');
-const cropsRoutes = require('./routes/cropsSuggestion');
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -27,6 +24,8 @@ app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 // Routes
 app.use("/detect", detectRoutes);
 app.use('/crops', cropsRoutes)
+app.use('/chat', chatRoutes);
+
 
 // Root route
 app.get("/", (req, res) => {
