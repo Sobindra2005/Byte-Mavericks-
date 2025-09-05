@@ -13,6 +13,7 @@ import Dashboard from './component/dashboard'
 import Community from './community/community'
 import DiseaseDetection from './component/DiseaseDetection'
 
+import Marketplace from './component/Marketplace'
 function App() {
   return (
     <>
@@ -29,6 +30,7 @@ function App() {
           <Route path="/community" element={<Community/>} />
           <Route path="/disease-detection" element={<DiseaseDetection/>} />
 
+          <Route path="/market" element={< Marketplace/>} />
         </Routes>
       </MainLayout> 
         
