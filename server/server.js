@@ -2,7 +2,6 @@ const express = require("express");
 const cors = require("cors");
 const path = require("path");
 
-const detectRoutes = require("./routes/detect");
 
 const app = express();
 
@@ -15,8 +14,6 @@ app.use(
   })
 );
 
-// Middleware
-const path = require('path');
 const detectRoutes = require('./routes/detect');
 const cropsRoutes = require('./routes/cropsSuggestion');
 

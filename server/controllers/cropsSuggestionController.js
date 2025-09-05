@@ -48,6 +48,7 @@ exports.getCropSuggestion = async (req, res) => {
 
         try {
             const parsed = JSON.parse(match[0]);
+            console.log(parsed)
             return res.json(parsed);
         } catch (err) {
             return res.status(500).json({ error: "Failed to parse JSON from AI response.", raw: text });
