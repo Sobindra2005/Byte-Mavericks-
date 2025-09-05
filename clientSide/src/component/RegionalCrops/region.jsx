@@ -1,8 +1,10 @@
-import React, { useEffect, useState } from "react";
-import { Link } from "react-router-dom";
+import { useEffect, useState } from "react";
 import { MapContainer, TileLayer, Marker, Popup, useMapEvents } from "react-leaflet";
 import "leaflet/dist/leaflet.css";
 import L from "leaflet";
+import axios from "axios";
+import { FaCheckCircle, FaExclamationTriangle, FaInfoCircle } from "react-icons/fa";
+import useStore from "../../store";
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -23,7 +25,7 @@ async function fetchPlaceName(lat, lon) {
   return data.display_name || "";
 }
 
-function LocationMarker({ setMapCenter, setMarkerDetails }) {
+function LocationMarker({ setMapCenter, setMarkerDetails, fetchDataOnMarkerChange }) {
   const [position, setPosition] = useState(null);
   const [details, setDetails] = useState({ name: "", description: "" });
 
@@ -34,6 +36,7 @@ function LocationMarker({ setMapCenter, setMarkerDetails }) {
       const name = await fetchPlaceName(e.latlng.lat, e.latlng.lng);
       setDetails((prev) => ({ ...prev, name }));
       setMarkerDetails({ position: e.latlng, details: { ...details, name } });
+      fetchDataOnMarkerChange(name);
     },
     locationfound: async (e) => {
       setPosition(e.latlng);
@@ -41,6 +44,8 @@ function LocationMarker({ setMapCenter, setMarkerDetails }) {
       const name = await fetchPlaceName(e.latlng.lat, e.latlng.lng);
       setDetails((prev) => ({ ...prev, name }));
       setMarkerDetails({ position: e.latlng, details: { ...details, name } });
+      fetchDataOnMarkerChange(name);
+
       map.flyTo(e.latlng, map.getZoom());
     },
   });
@@ -49,6 +54,7 @@ function LocationMarker({ setMapCenter, setMarkerDetails }) {
     const { name, value } = e.target;
     setDetails((prevDetails) => ({ ...prevDetails, [name]: value }));
     setMarkerDetails({ position, details: { ...details, [name]: value } });
+    fetchDataOnMarkerChange(name);
   };
 
   return position === null ? null : (
@@ -64,6 +70,7 @@ function LocationMarker({ setMapCenter, setMarkerDetails }) {
           const name = await fetchPlaceName(newPosition.lat, newPosition.lng);
           setDetails((prev) => ({ ...prev, name }));
           setMarkerDetails({ position: newPosition, details: { ...details, name } });
+          fetchDataOnMarkerChange()
         },
       }}
     >
@@ -101,19 +108,42 @@ export default function Region({ onFetchCrops }) {
     longitude: null,
   });
   const [markerDetails, setMarkerDetails] = useState(null);
+  const [fetchCrops, setFetchCrops] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
-      (position) => {
+      async (position) => {
         const { latitude, longitude } = position.coords;
         setUserLocation({ latitude, longitude });
-        setMapCenter([latitude, longitude]); // Center the map on user's location
+        setMapCenter([latitude, longitude]);
       },
       (error) => {
         console.error("Error getting location", error);
       }
     );
+
+
   }, []);
+
+  const language = useStore((state) => state.language);
+
+  const handleClickOnCrop = (crop) => {
+
+  };
+
+  const fetchDataOnMarkerChange = async (placeName) => {
+    if (!placeName) return;
+    setLoading(true);
+    const res = await axios.post(
+      "http://localhost:3000/crops",
+      { location: placeName },
+      { headers: { "Content-Type": "application/json" } }
+    );
+    setFetchCrops(res.data);
+    console.log(res.data);
+    setLoading(false);
+  };
 
   return (
     <div className="max-w-7xl mx-auto mt-10 grid grid-cols-1 md:grid-cols-2 gap-6">
@@ -152,6 +182,7 @@ export default function Region({ onFetchCrops }) {
               <LocationMarker
                 setMapCenter={setMapCenter}
                 setMarkerDetails={setMarkerDetails}
+                fetchDataOnMarkerChange={fetchDataOnMarkerChange}
               />
             </MapContainer>
           </div>
@@ -178,10 +209,26 @@ export default function Region({ onFetchCrops }) {
             </span>
           </div>
         </div>
+        {loading && (
+          <div className="flex flex-col items-center justify-center py-8">
+            <svg className="animate-spin h-8 w-8 text-green-500 mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+              <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+              <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+            </svg>
+            <span className="text-green-700 font-semibold">Loading crop suggestions...</span>
+          </div>
+        )}
+
+        {!loading && fetchCrops?.recommended_agri_business && fetchCrops.recommended_agri_business.length > 0 && (
+          <>
+            <SoilDetailsCard soilDetails={fetchCrops?.soil_details} language={language} />
+            <FinalConclusionCard finalConclusion={fetchCrops?.final_conclusion} language={language} />
+          </>
+        )}
       </div>
 
       {/* Right: Crop Suggestions */}
-      <div className="bg-white rounded-2xl shadow p-6 flex flex-col gap-6">
+      <div className="relative bg-white rounded-2xl shadow p-6 flex flex-col gap-6">
         <div>
           <div className="flex items-center gap-2 mb-2">
             <span className="text-orange-500 text-2xl">
@@ -197,39 +244,139 @@ export default function Region({ onFetchCrops }) {
           <p className="text-gray-600 mb-4 text-sm">
             स्थानीय मौसम र माटोको अवस्था अनुसार सिफारिस गरिएका बालीहरू
           </p>
+          {loading && (
+            <div className="flex flex-col items-center justify-center py-8">
+              <svg className="animate-spin h-8 w-8 text-green-500 mb-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
+              </svg>
+              <span className="text-green-700 font-semibold">Loading crop suggestions...</span>
+            </div>
+          )}
           {/* Sample Crop Suggestion Cards */}
           <div className="flex flex-col gap-4">
             {/* Rice */}
-            <div className="bg-gray-50 rounded-xl border-l-4  p-4 shadow-sm">
-              <div className="flex items-center justify-between mb-1">
-                <span className="font-bold text-lg text-gray-800">धान (Rice)</span>
-                <span className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs font-semibold">उपयुक्त</span>
+            {!loading && (!fetchCrops?.recommended_agri_business || fetchCrops.recommended_agri_business.length === 0) && (
+              <div className="flex flex-col items-center justify-center py-8">
+                <svg className="h-12 w-12 text-gray-300 mb-2" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+                <span className="text-gray-500 font-semibold text-lg">No crop suggestions found for this location.</span>
               </div>
-              <div className="flex flex-wrap gap-4 text-sm text-gray-700 mt-2">
-                <span>🗓️ मौसम: मनसुन</span>
-                <span>💧 वर्षा: 1000-2000mm</span>
-                <span>🌡️ तापक्रम: 20-35°C</span>
-                <span>📈 उत्पादन: 3-4 टन/हेक्टर</span>
+            )}
+
+            {/* Crop Suggestions */}
+            {!loading && fetchCrops?.recommended_agri_business && fetchCrops.recommended_agri_business.length > 0 && (
+              <div onClick={handleClickOnCrop} className="sticky top-0 flex flex-col gap-4 cursor-pointer">
+                {fetchCrops.recommended_agri_business.map((crop, idx) => {
+                  return (
+                    <div key={idx} className="bg-gray-50 rounded-xl border-l-4 border-green-400 p-4 shadow-sm">
+                      <div className="flex items-center justify-between mb-1">
+                        <span className="font-bold text-lg text-gray-800">{crop.name}</span>
+                        <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">
+                          {language == "en" ? crop.suitability?.en : crop.suitability?.ne}
+                        </span>
+                      </div>
+                      {/* Type field */}
+                      <div className="mb-2">
+                        <span className="inline-block bg-blue-100 text-blue-700 px-2 py-0.5 rounded text-xs font-medium">
+                          {crop.type}
+                        </span>
+                      </div>
+                      <div className="flex flex-wrap gap-4 text-sm text-gray-700 mt-2">
+                        {crop.season && (
+                          <span>
+                            🗓️ मौसम: {language == "en" ? crop.season?.en : crop.season?.ne}
+                          </span>
+                        )}
+                        {crop.rainfall && (
+                          <span>
+                            💧 वर्षा: {language == "en" ? crop.rainfall?.en : crop.rainfall?.ne}
+                          </span>
+                        )}
+                        {crop.temperature && (
+                          <span>
+                            🌡️ तापक्रम: {language == "en" ? crop.temperature?.en : crop.temperature?.ne}
+                          </span>
+                        )}
+                        {crop.productivity && (
+                          <span>
+                            📈 उत्पादन: {language == "en" ? crop.productivity?.en : crop.productivity?.ne}
+                          </span>
+                        )}
+                      </div>
+                      {crop.planting_time && (
+                        <div className="text-xs text-gray-500 mt-2">
+                          रोग्ने समय: {language == "en" ? crop.planting_time?.en : crop.planting_time?.ne}
+                        </div>
+                      )}
+                    </div>
+                  );
+                })}
               </div>
-              <div className="text-xs text-gray-500 mt-2">रोग्ने समय: जेठ-असार</div>
-            </div>
-            {/* Maize */}
-            <div className="bg-gray-50 rounded-xl border-l-4  p-4 shadow-sm">
-              <div className="flex items-center justify-between mb-1">
-                <span className="font-bold text-lg text-gray-800">मकै (Maize)</span>
-                <span className="bg-gray-200 text-gray-700 px-3 py-1 rounded-full text-xs font-semibold">उपयुक्त</span>
-              </div>
-              <div className="flex flex-wrap gap-4 text-sm text-gray-700 mt-2">
-                <span>🗓️ मौसम: वर्षा/हिउँद</span>
-                <span>💧 वर्षा: 500-1000mm</span>
-                <span>🌡️ तापक्रम: 15-30°C</span>
-                <span>📈 उत्पादन: 2-3 टन/हेक्टर</span>
-              </div>
-              <div className="text-xs text-gray-500 mt-2">रोग्ने समय: चैत-बैशाख</div>
-            </div>
+            )}
           </div>
         </div>
       </div>
+    </div>
+  );
+}
+
+
+function SoilDetailsCard({ soilDetails, language }) {
+  if (!soilDetails) return null;
+  const fields = [
+    { key: "pH", label: "pH" },
+    { key: "organic_matter", label: language === "en" ? "Organic Matter" : "जैविक पदार्थ" },
+    { key: "total_nitrogen", label: language === "en" ? "Total Nitrogen" : "नाइट्रोजन" },
+    { key: "phosphorus", label: language === "en" ? "Phosphorus" : "फस्फोरस" },
+    { key: "boron", label: language === "en" ? "Boron" : "बोरोन" },
+    { key: "sand_clay_percentage", label: language === "en" ? "Sand/Clay %" : "बालुवा/माटो %" },
+  ];
+
+  return (
+    <div className="bg-white rounded-xl shadow   p-4 mt-4">
+      <h3 className="font-bold text-gray-800 mb-2">
+        {language === "en" ? "Soil Details" : "माटो विवरण"}
+      </h3>
+      <div className="flex flex-col gap-4">
+        {fields.map(({ key, label }) => {
+          const prop = soilDetails[key];
+          if (!prop) return null;
+          return (
+            <div key={key} className="p-3 rounded-lg  bg-gray-50">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="font-semibold text-green-700">{label}:</span>
+                <span className="text-gray-800">{prop.value}</span>
+              </div>
+              <div className="text-sm text-gray-700 mb-1">
+                <FaInfoCircle className="inline mr-1 text-blue-400" />
+                {prop.interpretation?.[language]}
+              </div>
+              <div className="flex items-center gap-2 text-xs mb-1">
+                <FaCheckCircle className="text-green-500" />
+                <span>{prop.safety_check?.[language]}</span>
+              </div>
+              <div className="flex items-center gap-2 text-xs">
+                <FaExclamationTriangle className="text-yellow-500" />
+                <span>{prop.mitigation?.[language]}</span>
+              </div>
+            </div>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+function FinalConclusionCard({ finalConclusion, language }) {
+  if (!finalConclusion) return null;
+  return (
+    <div className="bg-green-50 border-l-4 border-green-400 rounded-xl p-4 mt-4 shadow">
+      <h4 className="font-bold text-green-800 mb-2">
+        {language === "en" ? "Summary & Advice" : "सारांश र सुझाव"}
+      </h4>
+      <p className="text-gray-800">{finalConclusion[language]}</p>
     </div>
   );
 }
