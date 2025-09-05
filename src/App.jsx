@@ -4,16 +4,23 @@ import './App.css'
 import MainLayout from './component/layout/layout'
 import Diary from './component/dairy'
 import RegionalCrops from './component/RegionalCrops/regionalCrops'
-
+import Course from './component/courses/course'
+import Player from './component/courses/player'
 function App() {
   return (
     <>
-      <MainLayout>
+    <Course />
+       <MainLayout>
         <Routes>
           <Route path="/diary" element={<Diary /> } />
           <Route path="/regional-crops" element={<RegionalCrops /> } />
+          <Route
+            path="/courses/player/:id"
+            element={ <Player />}
+          />
         </Routes>
-      </MainLayout>
+      </MainLayout> 
+        
     </>
   )
 }
