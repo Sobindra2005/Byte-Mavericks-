@@ -33,7 +33,7 @@ const Navbar = () => {
         </Link>
 
         {/* Register */}
-        <Link to="/signup">
+        <Link to="/signin">
           <li
             className="px-5 py-2 rounded-full bg-gradient-to-r from-[#FFD54F] to-[#FFB300] 
                        text-black font-semibold shadow-md hover:scale-105 
