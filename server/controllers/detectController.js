@@ -32,7 +32,6 @@ exports.detectImage = async (req, res) => {
         ? JSON.stringify(response.data.predictions, null, 2)
         : "[]";
 
-    console.log(predictions);
 
     const prompt = `You are an expert agricultural assistant. 
 You receive the following input from a crop disease detection model:
@@ -90,7 +89,7 @@ Constraints:
       parsed = { raw: aiOutput };
     }
 
-    res.json({
+   return  res.json({
       message: "Image uploaded and detected successfully!",
       result: response.data,
       ai: parsed,
