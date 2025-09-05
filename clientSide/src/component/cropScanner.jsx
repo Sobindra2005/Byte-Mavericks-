@@ -43,7 +43,7 @@ export default function CameraCapture() {
                 />
 
                 {/* Capture button */}
-                <div className="absolute bottom-10 flex flex-col items-center">
+                <div className="absolute bottom-20 flex flex-col items-center">
                     <button
                         onClick={capturePhoto}
                         className="px-6 py-3 bg-blue-600 text-white rounded-full shadow-lg hover:bg-blue-700 transition"
