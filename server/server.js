@@ -1,20 +1,34 @@
-const express = require('express');
-const app = express();
-const path = require('path');
-const detectRoutes = require('./routes/detect');
+const express = require("express");
+const cors = require("cors");
+const path = require("path");
 
+const detectRoutes = require("./routes/detect");
+
+const app = express();
+
+// ✅ Enable CORS for your frontend
+app.use(
+  cors({
+    origin: "http://localhost:5173", // your React app
+    methods: ["GET", "POST"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
+
+// Middleware
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
+app.use("/uploads", express.static(path.join(__dirname, "uploads")));
 
-app.use('/detect', detectRoutes);
+// Routes
+app.use("/detect", detectRoutes);
 
-app.get('/', (req, res) => {
-	res.send('Agro Shikshya Detection Server is Running 🏃‍♂️.');
+// Root route
+app.get("/", (req, res) => {
+  res.send("Express server is running.");
 });
 
-// Start server
 const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
-	console.log(`Server started on port ${PORT}`);
+  console.log(`Server started on port ${PORT}`);
 });
