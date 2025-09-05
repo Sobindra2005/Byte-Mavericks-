@@ -4,7 +4,6 @@ import logo from "../../assets/logo.svg";
 import Navbar from "../../nav/Navbar";
 import ChatAndScanner from "../../component/chatAndscanner";
 import { BsGlobe } from "react-icons/bs";
-import { FiMenu } from "react-icons/fi";
 import useStore from "../../store";
 
 const MainLayout = ({ children }) => {
