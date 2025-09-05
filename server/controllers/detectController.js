@@ -10,7 +10,7 @@ exports.detectImage = async (req, res) => {
 
   try {
     const ai = new GoogleGenAI({
-      apiKey: process.env.GOOGLE_KEY,
+      apiKey: process.env.GEMINIAPIKEY,
     });
 
     const image = fs.readFileSync(req.file.path, { encoding: "base64" });
