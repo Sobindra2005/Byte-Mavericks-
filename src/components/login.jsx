@@ -1,84 +1,76 @@
-import React, { useState } from "react";
-import Thumbnail from "../../assets/3.jpg";
+import React from "react";
 import { CiMail, CiLock } from "react-icons/ci";
 import { Link } from "react-router-dom";
-export default function Login() {
-  const [email, setemail] = useState("");
-  const [password, setpassword] = useState("");
+import Thumbnail from "../assets/3.jpg";
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    // No authentication, just UI
-    console.log("Form submitted:", { email, password });
-  };
-
-const login = () => {
+const Login = () => {
   return (
-    <div
-      style={{ backgroundImage: `url(${Thumbnail})` }}
-      className="min-h-screen bg-cover bg-center flex flex-col justify-center items-center"
-    >
-      <div className="bg-purewhite border border-accent rounded-lg m-2 p-4">
-        <h2 className="text-center font-bold text-xl">Login</h2>
-        <form
-          onSubmit={handleSubmit}
-          className="m-2 p-2 flex flex-col space-y-5 sm:w-96"
-        >
-          <label htmlFor="email" className="font-bold">
-            Email:
-          </label>
-          <div className="flex relative">
-            <CiMail className="absolute text-2xl block left-2 top-1/2 transform -translate-y-1/2" />
-            <input
-              value={email}
-              onChange={(e) => setemail(e.target.value)}
-              type="email"
-              name="email"
-              id="email"
-              className="border sm:w-96 p-2 pl-10"
-              placeholder="Enter your email..."
-              required
-            />
-          </div>
+    <div>
+      <div
+        style={{ backgroundImage: `url(${Thumbnail})` }}
+        className="min-h-screen bg-cover bg-center flex flex-col justify-center items-center"
+      >
+      
+        <div className="bg-white/30 backdrop-blur-lg border-2  m-2 p-6 w-full max-w-md shadow-lg rounded-2xl border-green-700 h-110">
+          <h2 className="text-center font-bold text-2xl mt-5 mb-6 text-green-900 drop-shadow-lg">
+            Login
+          </h2>
 
-          <label htmlFor="password" className="font-bold">
-            Password:
-          </label>
-          <div className="flex relative">
-            <CiLock className="absolute text-2xl block left-2 top-2" />
-            <input
-              type="password"
-              value={password}
-              onChange={(e) => setpassword(e.target.value)}
-              name="password"
-              id="password"
-              className="border sm:w-96 p-2 pl-10"
-              placeholder="Enter your password..."
-              required
-            />
-          </div>
+          <form className="flex flex-col space-y-5">
+            <div>
+              <label
+                htmlFor="email"
+                className="font-bold block mb-1 text-green-900"
+              >
+                Email:
+              </label>
+              <div className="flex relative">
+                <CiMail className="absolute text-2xl left-2 top-1/2 transform -translate-y-1/2 text-green-800" />
+                <input
+                  type="email"
+                  id="email"
+                  className="bg-white/20 border font-medium border-white/50 w-full p-2 pl-10 rounded font-bold text-green-900 placeholder-green-800 focus:outline-none focus:ring-2 focus:ring-green-700"
+                  placeholder="Enter your email..."
+                />
+              </div>
+            </div>
 
-          <button
-            type="submit"
-            className="bg-accent hover:bg-fourth text-white p-2 m-2"
-          >
-            Submit
-          </button>
-        </form>
+            <div>
+              <label
+                htmlFor="password"
+                className="font-bold block mb-1 text-green-900"
+              >
+                Password:
+              </label>
+              <div className="flex relative">
+                <CiLock className="absolute text-2xl left-2 top-1/2 transform -translate-y-1/2 text-green-800" />
+                <input
+                  type="password"
+                  id="password"
+                  className="bg-white/20 border font-medium border-white/50 w-full p-2 pl-10 rounded font-bold text-green-900 placeholder-green-800 focus:outline-none focus:ring-2 focus:ring-green-700"
+                  placeholder="Enter your password..."
+                />
+              </div>
+            </div>
 
-        <div className="flex flex-col justify-center items-center">
-          <div className="flex space-x-4">
-            <p>Don't have an account?</p>
-            <Link to="/signup">
-              <button className="underline underline-offset-2 font-bold text-accent">
-                Signup
-              </button>
+            <button
+              type="submit"
+              className="bg-green-700 hover:bg-green-800 text-white p-2 rounded shadow-lg"
+            >
+              Submit
+            </button>
+          </form>
+
+          <div className="flex justify-center items-center mt-4 space-x-2">
+            <p className="text-green-900 mt-3">Don't have an account?</p>
+            <Link to="/signup" className="mt-3 text-green-800 font-bold underline">
+              Signup
             </Link>
           </div>
         </div>
       </div>
     </div>
   );
-}
+};
 
-export default login
+export default Login;

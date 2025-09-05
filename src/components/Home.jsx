@@ -1,6 +1,7 @@
 import React from 'react'
 import Main from "../assets/main.png";
 import { Link } from 'react-router-dom';
+import { useTextLang } from '../libs/utils';
 const Home = () => {
   return (
     <div
@@ -12,7 +13,8 @@ const Home = () => {
     
       <div className="absolute inset-0 flex flex-col items-center justify-center text-center text-white px-4">
         <h2 className="text-5xl font-bold m-2">
-          के तपाईं कृषिमा रुचि राख्नुहुन्छ?
+          {useTextLang("Are you interested", "के तपाईं कृषिमा रुचि राख्नुहुन्छ?")}
+          
         </h2>
         <p className="text-2xl m-2">यदि तपाइँ इच्छुक हुनुहुन्छ भने</p>
         <Link
