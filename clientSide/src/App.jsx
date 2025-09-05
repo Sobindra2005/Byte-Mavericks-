@@ -8,7 +8,7 @@ import Diary from './component/dairy'
 import RegionalCrops from './component/RegionalCrops/regionalCrops'
 import Course from './component/courses/course'
 import Player from './component/courses/player'
-
+import Signin from './component/signin'
 function App() {
   return (
     <>
@@ -20,6 +20,7 @@ function App() {
           <Route path="/regional-crops" element={<RegionalCrops />} />
           <Route path="/courses" element={<Course />} />
           <Route path="/courses/player/:id" element={<Player />} />
+          <Route path="/signin" element={<Signin/>}/>
         </Routes>
       </MainLayout> 
         

@@ -6,13 +6,19 @@ import ChatAndScanner from "../../component/chatAndscanner";
 
 const MainLayout = ({ children }) => {
     const location = useLocation();
-    const isNotAuthenticated = (location.pathname === '/' || location.pathname === '/login' || location.pathname === '/signup')
+    const isNotAuthenticated = (location.pathname === '/' || location.pathname === '/login' || location.pathname === '/signin')
     return (
         <div className="max-h-screen h-screen flex flex-col">
             <header className="bg-[#142814] text-white p-2 ">
-                <Link to='/' className='flex items-center cursor-pointer'>
-                    <img src={logo} alt="" />
-                    <h6 className='text-xl'>Agro-Sikshya</h6>
+                <Link to="/" className="flex items-center cursor-pointer group">
+                    <img
+                        src={logo}
+                        alt="Logo"
+                        className="h-10 w-10 mr-2 transition-transform duration-300 group-hover:scale-110"
+                    />
+                    <h6 className="text-xl font-semibold text-white tracking-wide group-hover:text-[#FFD54F] transition-colors duration-300">
+                        Agro-Sikshya
+                    </h6>
                 </Link>
             </header>
             <div className="flex flex-1 relative h-0 min-h-0">
