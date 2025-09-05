@@ -1,20 +1,16 @@
 
 import { Routes } from 'react-router-dom'
 import './App.css'
-import Home from './Home'
+import Home from './components/Home'
 import MainLayout from './layout'
+import Navbar from './nav/Navbar'
 
 function App() {
   return (
     <>
-   
+   <Navbar />
     <Home/>
 
-      <MainLayout>
-        <Routes>
-          {/* <Route path="/" element={isLoggedIn ? <Course /> : <Home />} /> */}
-        </Routes>
-      </MainLayout>
     </>
   )
 }
