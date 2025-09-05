@@ -13,13 +13,14 @@ function App() {
     <>
       <MainLayout>
         <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/diary" element={<Diary />} />
           <Route path="/regional-crops" element={<RegionalCrops />} />
         </Routes>
       </MainLayout>
-      <Navbar />
-      <Home />
-      <Login />
+     
+     
 
     </>
   )

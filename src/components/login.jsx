@@ -1,22 +1,27 @@
 import React from "react";
 import { CiMail, CiLock } from "react-icons/ci";
-import { Link } from "react-router-dom";
+import { Link,useNavigate } from "react-router-dom";
 import Thumbnail from "../assets/3.jpg";
 
 const Login = () => {
+  const navigate = useNavigate();
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    navigate('/diary');
+  }
   return (
     <div>
       <div
         style={{ backgroundImage: `url(${Thumbnail})` }}
         className="min-h-screen bg-cover bg-center flex flex-col justify-center items-center"
       >
-      
+
         <div className="bg-white/30 backdrop-blur-lg border-2  m-2 p-6 w-full max-w-md shadow-lg rounded-2xl border-green-700 h-110">
           <h2 className="text-center font-bold text-2xl mt-5 mb-6 text-green-900 drop-shadow-lg">
             Login
           </h2>
 
-          <form className="flex flex-col space-y-5">
+          <form className="flex flex-col space-y-5" onSubmit={handleSubmit}>
             <div>
               <label
                 htmlFor="email"
