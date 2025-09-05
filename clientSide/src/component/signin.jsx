@@ -13,7 +13,7 @@ export default function Signin() {
       style={{ backgroundImage: `url(${Thumbnail})` }}
       className="min-h-screen bg-cover bg-center flex flex-col justify-center items-center"
     >
-      <div className="bg-white/30 backdrop-blur-lg border border-green/40 rounded-lg mt-[5rem] p-6 shadow-lg w-full border-green-800 max-w-4xl">
+      <div className="bg-white/30 backdrop-blur-lg border border-green/40 rounded-lg  p-6 shadow-lg w-full border-green-800 max-w-4xl">
         <h2 className="text-center font-bold text-3xl mb-6 text-green-800">
           Signup
         </h2>
