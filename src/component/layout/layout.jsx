@@ -5,7 +5,7 @@ import Navbar from "../../nav/Navbar";
 
 const MainLayout = ({ children }) => {
     const location = useLocation();
-    const isNotAuthenticated = (location.pathname === '/' || location.pathname === '/login')
+    const isNotAuthenticated = (location.pathname === '/' || location.pathname === '/login' || location.pathname === '/signup')
     return (
         <div className="max-h-screen h-screen flex flex-col">
             <header className="bg-[#142814] text-white p-2 ">
