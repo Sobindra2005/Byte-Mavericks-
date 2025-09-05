@@ -5,6 +5,7 @@ import L from "leaflet";
 import axios from "axios";
 import { FaCheckCircle, FaExclamationTriangle, FaInfoCircle } from "react-icons/fa";
 import useStore from "../../store";
+import { useNavigate } from "react-router-dom";
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -110,6 +111,7 @@ export default function Region({ onFetchCrops }) {
   const [markerDetails, setMarkerDetails] = useState(null);
   const [fetchCrops, setFetchCrops] = useState(null);
   const [loading, setLoading] = useState(false);
+  const navigate=useNavigate();
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -129,7 +131,10 @@ export default function Region({ onFetchCrops }) {
   const language = useStore((state) => state.language);
 
   const handleClickOnCrop = (crop) => {
-
+    console.log("current crops is :",crop)
+   if(crop.includes('Cauliflower')){
+    navigate('/courses/player/cauliflower-farming')
+   }
   };
 
   const fetchDataOnMarkerChange = async (placeName) => {
@@ -215,7 +220,7 @@ export default function Region({ onFetchCrops }) {
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
             </svg>
-            <span className="text-green-700 font-semibold">Loading crop suggestions...</span>
+            <span className="text-green-700 font-semibold">Loading soil Data...</span>
           </div>
         )}
 
@@ -267,14 +272,14 @@ export default function Region({ onFetchCrops }) {
 
             {/* Crop Suggestions */}
             {!loading && fetchCrops?.recommended_agri_business && fetchCrops.recommended_agri_business.length > 0 && (
-              <div onClick={handleClickOnCrop} className="sticky top-0 flex flex-col gap-4 cursor-pointer">
+              <div  className="sticky top-0 flex flex-col gap-4 cursor-pointer">
                 {fetchCrops.recommended_agri_business.map((crop, idx) => {
                   return (
-                    <div key={idx} className="bg-gray-50 rounded-xl border-l-4 border-green-400 p-4 shadow-sm">
+                    <div onClick={()=>handleClickOnCrop(crop.name)} key={idx} className="bg-gray-50 rounded-xl border-l-4 border-green-400 p-4 shadow-sm">
                       <div className="flex items-center justify-between mb-1">
                         <span className="font-bold text-lg text-gray-800">{crop.name}</span>
                         <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">
-                          {language == "en" ? crop.suitability?.en : crop.suitability?.ne}
+                          {language == "en" ? crop.suitability?.en : crop.suitability?.np}
                         </span>
                       </div>
                       {/* Type field */}
@@ -286,28 +291,28 @@ export default function Region({ onFetchCrops }) {
                       <div className="flex flex-wrap gap-4 text-sm text-gray-700 mt-2">
                         {crop.season && (
                           <span>
-                            🗓️ मौसम: {language == "en" ? crop.season?.en : crop.season?.ne}
+                            🗓️ मौसम: {language == "en" ? crop.season?.en : crop.season?.np}
                           </span>
                         )}
                         {crop.rainfall && (
                           <span>
-                            💧 वर्षा: {language == "en" ? crop.rainfall?.en : crop.rainfall?.ne}
+                            💧 वर्षा: {language == "en" ? crop.rainfall?.en : crop.rainfall?.np}
                           </span>
                         )}
                         {crop.temperature && (
                           <span>
-                            🌡️ तापक्रम: {language == "en" ? crop.temperature?.en : crop.temperature?.ne}
+                            🌡️ तापक्रम: {language == "en" ? crop.temperature?.en : crop.temperature?.np}
                           </span>
                         )}
                         {crop.productivity && (
                           <span>
-                            📈 उत्पादन: {language == "en" ? crop.productivity?.en : crop.productivity?.ne}
+                            📈 उत्पादन: {language == "en" ? crop.productivity?.en : crop.productivity?.np}
                           </span>
                         )}
                       </div>
                       {crop.planting_time && (
                         <div className="text-xs text-gray-500 mt-2">
-                          रोग्ने समय: {language == "en" ? crop.planting_time?.en : crop.planting_time?.ne}
+                          रोग्ने समय: {language == "en" ? crop.planting_time?.en : crop.planting_time?.np}
                         </div>
                       )}
                     </div>
@@ -327,11 +332,11 @@ function SoilDetailsCard({ soilDetails, language }) {
   if (!soilDetails) return null;
   const fields = [
     { key: "pH", label: "pH" },
-    { key: "organic_matter", label: language === "en" ? "Organic Matter" : "जैविक पदार्थ" },
-    { key: "total_nitrogen", label: language === "en" ? "Total Nitrogen" : "नाइट्रोजन" },
-    { key: "phosphorus", label: language === "en" ? "Phosphorus" : "फस्फोरस" },
-    { key: "boron", label: language === "en" ? "Boron" : "बोरोन" },
-    { key: "sand_clay_percentage", label: language === "en" ? "Sand/Clay %" : "बालुवा/माटो %" },
+    { key: "OrganicMatter", label: language === "np" ? "जैविक पदार्थ" : "Organic Matter" },
+    { key: "TotalNitrogen", label: language === "np" ? "नाइट्रोजन" : "Total Nitrogen" },
+    { key: "P2O5", label: language === "np" ? "फस्फोरस" : "Phosphorus" },
+    { key: "Boron", label: language === "np" ? "बोरोन" : "Boron" },
+    { key: "sand/clayPercentage", label: language === "np" ? "बालुवा/माटो %" : "Sand/Clay %" },
   ];
 
   return (
