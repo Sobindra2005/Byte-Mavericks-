@@ -9,6 +9,7 @@ import RegionalCrops from './component/RegionalCrops/regionalCrops'
 import Course from './component/courses/course'
 import Player from './component/courses/player'
 import Signin from './component/signin'
+import Dashboard from './component/dashboard'
 function App() {
   return (
     <>
@@ -21,6 +22,7 @@ function App() {
           <Route path="/courses" element={<Course />} />
           <Route path="/courses/player/:id" element={<Player />} />
           <Route path="/signin" element={<Signin/>}/>
+          <Route path="/dashboard" element={<Dashboard/>}/>
         </Routes>
       </MainLayout> 
         

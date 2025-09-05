@@ -8,7 +8,7 @@ const Navbar = () => {
       className="fixed top-0 left-0 w-full h-16 z-50 flex justify-between items-center px-8
                  bg-[rgba(20,40,20,0.65)] backdrop-blur-md border-b border-white/20 shadow-lg"
     >
-      {/* Logo */}
+ 
       <Link to="/" className="flex items-center cursor-pointer group">
         <img
           src={Logo}
@@ -20,9 +20,9 @@ const Navbar = () => {
         </h6>
       </Link>
 
-      {/* Links */}
+    
       <ul className="flex space-x-6 sm:space-x-10 items-center font-medium">
-        {/* Login */}
+        
         <Link to="/login">
           <li
             className="text-white/90 hover:text-[#FFD54F] transition-colors duration-300 
