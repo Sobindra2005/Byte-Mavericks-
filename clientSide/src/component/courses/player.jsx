@@ -4,13 +4,14 @@ import Datas from './datas';
 import Part from './part';
 import Review from './review';
 import ReviewForm from './writereview';
+import { useTextLang } from '../../libs/utils';
 
 export default function Player() {
   const { id } = useParams();
-  const [features,setFeatures] =useState()
   const data = Datas.find((item) => item.id === id);
 
   
+
 
   if (!data) {
     return <div>Data not found.</div>;
@@ -19,33 +20,33 @@ export default function Player() {
 
   return (
     <>
-      <div>
-        <div className='flex flex-col justify-center items-center m-5 p-5'>
-          <h1 className=' m-3 text-center font-bold text-3xl'>{data.title}</h1>
-          <img src={data.thumbnail} alt={data.title} className='sm:w-96 sm:h-96' />
-          <div>
-
-          <h2 className='text-xl text-start mt-5 m-2 font-bold sm:ml-16'>यहाँ भिडियोको मुख्य बुँदाहरू छन्:</h2>
-        <ul className="list-disc list-inside mb-4 sm:ml-16 space-y-5">
-        {data.features && data.features.map((feature, index) => (
-          <li key={index} >{feature}</li>
-        ))}
-        </ul>
-        </div>
-          <Link to={`/regional-crops/tomatoguide`} className='border border-accent p-2 rounded-xl hover:bg-accent hover:text-white '>
-          कसरी रोप्ने
-          </Link>
+      <div className="max-w-3xl mx-auto px-4 py-8">
+        <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center">
+          <h1 className="mb-4 text-center font-bold text-3xl text-green-800">{data.title}</h1>
+          <img src={data.thumbnail} alt={data.title} className="w-full max-w-md h-64 object-cover rounded-xl shadow mb-6" />
+          <div className="w-full">
+            <h2 className="text-xl font-bold text-green-700 mb-3">यहाँ भिडियोको मुख्य बुँदाहरू छन्:</h2>
+            <ul className="list-disc list-inside mb-6 space-y-3 pl-4">
+              {data.features && data.features.map((feature, index) => (
+                <li key={index} className="text-gray-800 text-base">{feature}</li>
+              ))}
+            </ul>
+            <div className="flex flex-wrap gap-4 justify-center mt-4">
+              <Link to={`/courses/player/${id}/cultivation`} className="border border-green-500 text-green-700 px-5 py-2 rounded-full font-semibold hover:bg-green-500 hover:text-white transition-all shadow">
+                {useTextLang('How to Plant', 'कसरी रोप्ने')}
+              </Link>
+              <Link to={`/courses/player/${id}/diseases`} className="border border-green-500 text-green-700 px-5 py-2 rounded-full font-semibold hover:bg-green-500 hover:text-white transition-all shadow">
+                {useTextLang('Identify its diseases and causes', 'यसको रोग र कारण पत्ता लगाउनुहोस्।')}
+              </Link>
+            </div>
           </div>
         </div>
+      </div>
+      <div className="max-w-3xl mx-auto px-4">
         <Part/>
-        <div className='flex items-center justify-center m-5 space-x-4  '>
-          <Link to={`/courses/player/${id}/diseases`} className='border border-accent p-2 rounded-xl hover:bg-accent hover:text-white '>
-          यसको रोग र कारण पत्ता लगाउनुहोस्।
-          </Link>
-         
-        </div>
-          <Review/>
-          <ReviewForm/>
-      </>
+        <Review/>
+        <ReviewForm/>
+      </div>
+    </>
   );
 }

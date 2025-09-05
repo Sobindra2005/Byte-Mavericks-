@@ -3,6 +3,7 @@ import Logo from "../assets/logo.svg";
 import { Link } from "react-router-dom";
 import useStore from "../store";
 import { useTextLang } from "../libs/utils";
+import { FaGlobe } from "react-icons/fa";
 
 const Navbar = () => {
   const setLanguage = useStore((state) => state.setLanguage);
@@ -27,17 +28,18 @@ const Navbar = () => {
       </Link>
 
     
-      <ul className="flex space-x-6 sm:space-x-10 items-center font-medium">
+      <ul className="flex space-x-6 items-center font-medium">
         <button
           onClick={setLanguage}
-          className="text-white/90 hover:text-[#FFD54F] transition-colors duration-300 cursor-pointer tracking-wide"
+          className="text-white/90 flex items-center justify-center gap-2 border-white border-1 px-3   py-1 rounded-full hover:text-[#FFD54F] transition-colors duration-300 cursor-pointer tracking-wide"
         >
+          <FaGlobe/>
           {useTextLang("EN/NP", "ने/इं")}
         </button>
         
         <Link to="/login">
           <li
-            className="text-white/90 hover:text-[#FFD54F] transition-colors duration-300 
+            className="text-white/90 hover:text-[#FFD54F]   border-white border-1 px-3 py-1 rounded-full transition-colors duration-300 
                        cursor-pointer tracking-wide"
           >
             {loginLabel}
@@ -46,7 +48,7 @@ const Navbar = () => {
 
         <Link to="/signin">
           <li
-            className="px-5 py-2 rounded-full bg-gradient-to-r from-[#FFD54F] to-[#FFB300] 
+            className="px-5 py-1 rounded-full bg-gradient-to-r from-[#FFD54F] to-[#FFB300] 
                        text-black font-semibold shadow-md hover:scale-105 
                        transition-transform duration-300 cursor-pointer"
           >
