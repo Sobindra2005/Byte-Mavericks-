@@ -7,7 +7,7 @@ import { FiMenu, FiX } from 'react-icons/fi';
 
 const menuItems = [
   { to: '/courses', icon: <FaBookOpen />, label: 'Course' },
-  { to: '/business-diary', icon: <FaBook />, label: 'Business Diary' },
+  { to: '/diary', icon: <FaBook />, label: 'Business Diary' },
   { to: '/regional-crops', icon: <VscGraph />, label: 'Regional Crops' },
   { to: '/market', icon: <BsGraphUpArrow />, label: 'Market Trend' },
   { to: '/community', icon: <FaUsers />, label: 'Expert Advice' },
