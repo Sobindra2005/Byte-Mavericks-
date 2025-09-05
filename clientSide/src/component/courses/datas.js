@@ -11,7 +11,8 @@ let Datas = [
   {
     id: "goat-farming",
     username: "Agro-sikshya",
-    title: "बाख्रा पालेर विदेशसरह कमाइ गर्दै विजय राई l Goat Farming Success Story | Nepal Farkeypachi",
+    title: "बाख्रा पालेर विदेशसरह कमाइ गर्दै विजय राई  ",
+    title_en: "Goat farming success story of Bijay Rai in Nepal",
     subtitle:"टमाटर कसरी बढ्ने बारे पूर्ण पाठ्यक्रम",
     thumbnail:G,
     type:"animal",
@@ -82,7 +83,8 @@ let Datas = [
     username: "Agro-sikshya",
     thumbnail:Chicken,
     type:"animal",
-    title: "कुखुरा पालन व्यवसाय कसरी सुरु गर्ने ? | Poultry Farming | Nepal Farkeypachi",
+    title: "कुखुरा पालन व्यवसाय कसरी सुरु गर्ने ? ",
+    title_en: "How to start poultry farming business in Nepal ? ",
     subtitle:"टमाटर कसरी बढ्ने बारे पूर्ण पाठ्यक्रम",
     url: "https://drive.google.com/file/d/1RZ6CbcfEvgf6Mf1w1ELgPIu1zaMzMdNG/preview",
     features:[
@@ -101,7 +103,8 @@ let Datas = [
     username: "Agro-sikshya",
     thumbnail:Banana,
     type:"plant",
-    title: "केरा खेतीको बढ्दो बजार, लगानी सय, आम्दानी हजार | Banana Farming In Nepal",
+    title: "केरा खेतीको बढ्दो बजार, लगानी सय, आम्दानी हजार ",
+    title_en: "Banana farming: Growing market and profitable investment",
     subtitle:"टमाटर कसरी बढ्ने बारे पूर्ण पाठ्यक्रम",
     features:[
       "भिडियोमा नेपालमा बढ्दो कुखुरा पालन व्यवसाय, विशेषगरी बोलर कुखुरा पालनको बारेमा चर्चा गरिएको छ।", 
@@ -168,7 +171,8 @@ let Datas = [
     username: "Agro-sikshya",
     thumbnail:Flower,
     type:"plant",
-    title: "फुल खेती एक पटकको लगानी, पाँच वर्ष ढुक्क आम्दानी | Cut Flower Business | ",
+    title: "फुल खेती एक पटकको लगानी, पाँच वर्ष ढुक्क आम्दानी  ",
+    title_en: "Cut flower business: One-time investment, years of income",
     subtitle:"टमाटर कसरी बढ्ने बारे पूर्ण पाठ्यक्रम",
     url: "https://www.youtube.com/embed/GUHUKj3k5jc?si=TzF7DoFQiJY1r1z0",
     features: [
@@ -234,7 +238,8 @@ let Datas = [
     username: "Agro-sikshya",
     thumbnail:Tomato,
     type:"plant",
-    title: "यसरी गरे गोलभेँडा खेती गर्न सकिन्छ लाखौंको आम्दानी | Tomato Farming",
+    title: "यसरी गरे गोलभेँडा खेती गर्न सकिन्छ लाखौंको आम्दानी ",
+    title_en: "Tomato farming: Steps to high earnings",
     subtitle:"टमाटर कसरी बढ्ने बारे पूर्ण पाठ्यक्रम",
     features:[
       "मौसम: गोलभेडा गर्मीको मौसममा राम्रो उब्जिन्छ।",
@@ -301,7 +306,8 @@ let Datas = [
     username: "Agro-sikshya",
     thumbnail:Mushroom,
     type:"plant",
-    title: "एक महिनामै च्याउ खेतीबाट कसरी गर्ने लाखौंको आम्दानी? |Mushroom Farming",
+    title: "एक महिनामै च्याउ खेतीबाट कसरी गर्ने लाखौंको आम्दानी? ",
+    title_en: "Mushroom farming: Earn big within a month",
     subtitle:"टमाटर कसरी बढ्ने बारे पूर्ण पाठ्यक्रम",
     features:[
       "भिडियोमा नेपालमा बढ्दो कुखुरा पालन व्यवसाय, विशेषगरी बोलर कुखुरा पालनको बारेमा चर्चा गरिएको छ।", 
@@ -368,7 +374,8 @@ let Datas = [
     username: "Agro-sikshya",
     thumbnail:Pig,
     type:"animal",
-    title: "बङ्गुर पालेर बन्ने होइन त मालामाल? | Pig Farming In Nepal",
+    title: "बङ्गुर पालेर बन्ने होइन त मालामाल?",
+    title_en: "Pig farming in Nepal: Can it make you rich?",
     subtitle:"टमाटर कसरी बढ्ने बारे पूर्ण पाठ्यक्रम",
     features:[
       "भिडियोमा नेपालमा बढ्दो कुखुरा पालन व्यवसाय, विशेषगरी बोलर कुखुरा पालनको बारेमा चर्चा गरिएको छ।", 
@@ -385,6 +392,7 @@ let Datas = [
     thumbnail:Cauliflower,
     type:"plant",
     title: "लाखौं आम्दानी हुने भएपछि फूलको व्रिद्धिमा खेती आर्कषण",
+    title_en: "Cauliflower farming: Profitable cultivation opportunity",
     subtitle:"काउली कसरी बढ्ने बारे पूर्ण पाठ्यक्रम",
     features: [
       "भिडियोमा नेपालमा बढ्दो फूलको व्रिद्धि व्यवसाय, विशेषगरी बोटका र विशेष प्रजातिका फूलहरूको बारेमा चर्चा गरिएको छ।",
