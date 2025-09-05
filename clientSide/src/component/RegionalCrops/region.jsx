@@ -108,7 +108,247 @@ export default function Region({ onFetchCrops }) {
     longitude: null,
   });
   const [markerDetails, setMarkerDetails] = useState(null);
-  const [fetchCrops, setFetchCrops] = useState(null);
+  const [fetchCrops, setFetchCrops] = useState({
+    "location": "Galkopakha, Kathmandu-16, Kathmandu Metropolitan City, Kathmandu, Bagamati Province, Nepal",
+    "recommended_agri_business": [
+        {
+            "type": "Vegetable",
+            "name": "Tomato (गोलभेडा)",
+            "suitability": {
+                "en": "Highly Suitable",
+                "np": "धेरै उपयुक्त"
+            },
+            "season": {
+                "en": "Spring-Summer, Autumn-Winter",
+                "np": "वसन्त-गर्मी, शरद-जाडो"
+            },
+            "rainfall": {
+                "en": "600-800 mm",
+                "np": "६००-८०० मिमी"
+            },
+            "temperature": {
+                "en": "21-24°C",
+                "np": "२१-२४ डिग्री सेल्सियस"
+            },
+            "productivity": {
+                "en": "25-30 tons/hectare",
+                "np": "२५-३० टन/हेक्टर"
+            },
+            "planting_time": {
+                "en": "February-March, August-September",
+                "np": "फेब्रुअरी-मार्च, अगस्ट-सेप्टेम्बर"
+            }
+        },
+        {
+            "type": "Vegetable",
+            "name": "Cauliflower (काउली)",
+            "suitability": {
+                "en": "Suitable",
+                "np": "उपयुक्त"
+            },
+            "season": {
+                "en": "Autumn-Winter",
+                "np": "शरद-जाडो"
+            },
+            "rainfall": {
+                "en": "600-700 mm",
+                "np": "६००-७०० मिमी"
+            },
+            "temperature": {
+                "en": "15-20°C",
+                "np": "१५-२० डिग्री सेल्सियस"
+            },
+            "productivity": {
+                "en": "15-20 tons/hectare",
+                "np": "१५-२० टन/हेक्टर"
+            },
+            "planting_time": {
+                "en": "September-October",
+                "np": "सेप्टेम्बर-अक्टोबर"
+            }
+        },
+        {
+            "type": "Fruit",
+            "name": "Mandarin Orange (सुन्तला)",
+            "suitability": {
+                "en": "Moderately Suitable",
+                "np": "मध्यम उपयुक्त"
+            },
+            "season": {
+                "en": "Year-round (harvest in winter)",
+                "np": "वर्षभरि (जाडोमा फसल)"
+            },
+            "rainfall": {
+                "en": "1000-1500 mm",
+                "np": "१०००-१५०० मिमी"
+            },
+            "temperature": {
+                "en": "20-30°C",
+                "np": "२०-३० डिग्री सेल्सियस"
+            },
+            "productivity": {
+                "en": "10-15 tons/hectare",
+                "np": "१०-१५ टन/हेक्टर"
+            },
+            "planting_time": {
+                "en": "June-July",
+                "np": "जुन-जुलाई"
+            }
+        },
+        {
+            "type": "Crop",
+            "name": "Rice (धान)",
+            "suitability": {
+                "en": "Suitable",
+                "np": "उपयुक्त"
+            },
+            "season": {
+                "en": "Summer",
+                "np": "गर्मी"
+            },
+            "rainfall": {
+                "en": "1200-1500 mm",
+                "np": "१२००-१५०० मिमी"
+            },
+            "temperature": {
+                "en": "20-35°C",
+                "np": "२०-३५ डिग्री सेल्सियस"
+            },
+            "productivity": {
+                "en": "3-4 tons/hectare",
+                "np": "३-४ टन/हेक्टर"
+            },
+            "planting_time": {
+                "en": "June-July",
+                "np": "जुन-जुलाई"
+            }
+        },
+        {
+            "type": "Livestock",
+            "name": "Goat Farming (बाख्रा पालन)",
+            "suitability": {
+                "en": "Highly Suitable",
+                "np": "धेरै उपयुक्त"
+            },
+            "season": {
+                "en": "Year-round",
+                "np": "वर्षभरि"
+            },
+            "rainfall": {
+                "en": "N/A",
+                "np": " N/A"
+            },
+            "temperature": {
+                "en": "5-35°C",
+                "np": "५-३५ डिग्री सेल्सियस"
+            },
+            "productivity": {
+                "en": "Variable based on breed and management",
+                "np": "नस्ल र व्यवस्थापनको आधारमा परिवर्तनशील"
+            },
+            "planting_time": {
+                "en": "N/A",
+                "np": " N/A"
+            }
+        }
+    ],
+    "soil_details": {
+        "pH": {
+            "value": "5.5-7.0",
+            "interpretation": {
+                "en": "Slightly acidic to neutral. Safe range for most crops and vegetables. Monitor and adjust if necessary.",
+                "np": "अलिकति अम्लीय देखि तटस्थ। धेरै बाली र तरकारीहरूको लागि सुरक्षित दायरा। आवश्यक भएमा निगरानी र समायोजन गर्नुहोस्।"
+            },
+            "safety_check": {
+                "en": "Within the acceptable range for most common crops. Regular soil testing is recommended to ensure optimal levels.",
+                "np": "धेरै सामान्य बालीहरूको लागि स्वीकार्य दायरा भित्र। इष्टतम स्तरहरू सुनिश्चित गर्न नियमित माटो परीक्षण सिफारिस गरिन्छ।"
+            },
+            "mitigation": {
+                "en": "If pH is too low (acidic), apply lime. If too high (alkaline) apply sulfur or organic matter.",
+                "np": "यदि pH धेरै कम (अम्लीय) छ भने, चुना प्रयोग गर्नुहोस्। यदि धेरै उच्च (क्षारीय) छ भने सल्फर वा जैविक पदार्थ प्रयोग गर्नुहोस्।"
+            }
+        },
+        "OrganicMatter": {
+            "value": "1-3%",
+            "interpretation": {
+                "en": "Low to Moderate. Organic matter is crucial for soil fertility, water retention, and nutrient availability.",
+                "np": "कम देखि मध्यम। जैविक पदार्थ माटोको उर्वरता, पानी अवधारण, र पोषक तत्व उपलब्धताको लागि महत्वपूर्ण छ।"
+            },
+            "safety_check": {
+                "en": "Below optimal levels for high productivity. Should be increased to at least 3% for best results.",
+                "np": "उच्च उत्पादकताको लागि इष्टतम स्तर भन्दा तल। उत्तम परिणामको लागि कम्तिमा 3% सम्म बढाउनुपर्छ।"
+            },
+            "mitigation": {
+                "en": "Incorporate compost, manure, or green manure crops to increase organic matter content.",
+                "np": "जैविक पदार्थ सामग्री बढाउन कम्पोस्ट, मल, वा हरियो मल बालीहरू समावेश गर्नुहोस्।"
+            }
+        },
+        "TotalNitrogen": {
+            "value": "0.05-0.15%",
+            "interpretation": {
+                "en": "Low to Moderate. Nitrogen is essential for plant growth, especially leaf development.",
+                "np": "कम देखि मध्यम। नाइट्रोजन बिरुवाको वृद्धिको लागि आवश्यक छ, विशेष गरी पात विकासको लागि।"
+            },
+            "safety_check": {
+                "en": "May require supplementation with nitrogen fertilizers, especially for leafy vegetables and cereals.",
+                "np": "पातदार तरकारी र अन्न बालीहरूको लागि नाइट्रोजन मलको साथ पूरक आवश्यक हुन सक्छ।"
+            },
+            "mitigation": {
+                "en": "Use nitrogen-fixing cover crops (legumes) or apply nitrogen fertilizers (urea, ammonium sulfate) judiciously.",
+                "np": "नाइट्रोजन फिक्सिंग कभर बालीहरू (सिमी) प्रयोग गर्नुहोस् वा नाइट्रोजन मलहरू (यूरिया, अमोनियम सल्फेट) सावधानीपूर्वक प्रयोग गर्नुहोस्।"
+            }
+        },
+        "P2O5": {
+            "value": "10-20 ppm",
+            "interpretation": {
+                "en": "Low to Moderate. Phosphorus is important for root development, flowering, and fruit set.",
+                "np": "कम देखि मध्यम। फस्फोरस जराको विकास, फूल फुल्ने, र फल लाग्नको लागि महत्त्वपूर्ण छ।"
+            },
+            "safety_check": {
+                "en": "May require phosphorus fertilizer application, especially for root crops and fruits.",
+                "np": "फस्फोरस मलको प्रयोग आवश्यक हुन सक्छ, विशेष गरी जरा बाली र फलहरूको लागि।"
+            },
+            "mitigation": {
+                "en": "Apply phosphorus fertilizers (DAP, SSP) based on soil test recommendations.",
+                "np": "माटो परीक्षण सिफारिसको आधारमा फस्फोरस मलहरू (डीएपी, एसएसपी) प्रयोग गर्नुहोस्।"
+            }
+        },
+        "Boron": {
+            "value": "<1 ppm",
+            "interpretation": {
+                "en": "Low. Boron is a micronutrient essential for cell wall development and sugar transport.",
+                "np": "कम। बोरोन कोशिका पर्खाल विकास र चिनी ढुवानीको लागि आवश्यक सूक्ष्म पोषक तत्व हो।"
+            },
+            "safety_check": {
+                "en": "Boron deficiency is possible. Soil test is recommended to ensure safe amount.",
+                "np": "बोरोनको कमी हुन सक्छ। सुरक्षित मात्रा सुनिश्चित गर्न माटो परीक्षण सिफारिस गरिन्छ।"
+            },
+            "mitigation": {
+                "en": "Apply borax or other boron-containing fertilizers at recommended rates.",
+                "np": "सिफारिस गरिएको दरमा बोराक्स वा अन्य बोरोन युक्त मलहरू प्रयोग गर्नुहोस्।"
+            }
+        },
+        "sand/clayPercentage": {
+            "value": "Sandy Loam",
+            "interpretation": {
+                "en": "Well-drained soil, good aeration, but may have lower water and nutrient retention. Mix of sand, silt and clay",
+                "np": "राम्रो निकास भएको माटो, राम्रो हावा आवतजावत, तर कम पानी र पोषक तत्व अवधारण हुन सक्छ। बालुवा, सिल्ट र माटोको मिश्रण।"
+            },
+            "safety_check": {
+                "en": "Generally favorable for a wide range of crops. Manage water and nutrient availability carefully.",
+                "np": "सामान्यतया धेरै बालीहरूको लागि अनुकूल। पानी र पोषक तत्व उपलब्धता सावधानीपूर्वक व्यवस्थापन गर्नुहोस्।"
+            },
+            "mitigation": {
+                "en": "Add organic matter to improve water and nutrient retention. Consider irrigation during dry periods.",
+                "np": "पानी र पोषक तत्व अवधारण सुधार गर्न जैविक पदार्थ थप्नुहोस्। सुख्खा अवधिमा सिंचाई विचार गर्नुहोस्।"
+            }
+        }
+    },
+    "final_conclusion": {
+        "en": "Galkopakha, Kathmandu, has a climate and soil suitable for a variety of crops, vegetables, fruits and livestock. Focus on soil improvement (organic matter) and proper nutrient management for optimal yields. Consider water management practices, especially during dry seasons. Goat farming is a viable option due to the diverse vegetation and terrain.",
+        "np": "गाल्कोपाखा, काठमाडौंमा विभिन्न बाली, तरकारी, फलफूल र पशुपालनका लागि उपयुक्त हावापानी र माटो छ। इष्टतम उपजका लागि माटो सुधार (जैविक पदार्थ) र उचित पोषक तत्व व्यवस्थापनमा ध्यान दिनुहोस्। पानी व्यवस्थापन अभ्यासहरू विचार गर्नुहोस्, विशेष गरी सुख्खा मौसममा। बाख्रा पालन विविध वनस्पति र भूभागका कारण एक व्यवहार्य विकल्प हो।"
+    }
+});
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
@@ -215,7 +455,7 @@ export default function Region({ onFetchCrops }) {
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
             </svg>
-            <span className="text-green-700 font-semibold">Loading crop suggestions...</span>
+            <span className="text-green-700 font-semibold">Loading soil Data...</span>
           </div>
         )}
 
@@ -274,7 +514,7 @@ export default function Region({ onFetchCrops }) {
                       <div className="flex items-center justify-between mb-1">
                         <span className="font-bold text-lg text-gray-800">{crop.name}</span>
                         <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">
-                          {language == "en" ? crop.suitability?.en : crop.suitability?.ne}
+                          {language == "en" ? crop.suitability?.en : crop.suitability?.np}
                         </span>
                       </div>
                       {/* Type field */}
@@ -286,28 +526,28 @@ export default function Region({ onFetchCrops }) {
                       <div className="flex flex-wrap gap-4 text-sm text-gray-700 mt-2">
                         {crop.season && (
                           <span>
-                            🗓️ मौसम: {language == "en" ? crop.season?.en : crop.season?.ne}
+                            🗓️ मौसम: {language == "en" ? crop.season?.en : crop.season?.np}
                           </span>
                         )}
                         {crop.rainfall && (
                           <span>
-                            💧 वर्षा: {language == "en" ? crop.rainfall?.en : crop.rainfall?.ne}
+                            💧 वर्षा: {language == "en" ? crop.rainfall?.en : crop.rainfall?.np}
                           </span>
                         )}
                         {crop.temperature && (
                           <span>
-                            🌡️ तापक्रम: {language == "en" ? crop.temperature?.en : crop.temperature?.ne}
+                            🌡️ तापक्रम: {language == "en" ? crop.temperature?.en : crop.temperature?.np}
                           </span>
                         )}
                         {crop.productivity && (
                           <span>
-                            📈 उत्पादन: {language == "en" ? crop.productivity?.en : crop.productivity?.ne}
+                            📈 उत्पादन: {language == "en" ? crop.productivity?.en : crop.productivity?.np}
                           </span>
                         )}
                       </div>
                       {crop.planting_time && (
                         <div className="text-xs text-gray-500 mt-2">
-                          रोग्ने समय: {language == "en" ? crop.planting_time?.en : crop.planting_time?.ne}
+                          रोग्ने समय: {language == "en" ? crop.planting_time?.en : crop.planting_time?.np}
                         </div>
                       )}
                     </div>
@@ -327,11 +567,11 @@ function SoilDetailsCard({ soilDetails, language }) {
   if (!soilDetails) return null;
   const fields = [
     { key: "pH", label: "pH" },
-    { key: "organic_matter", label: language === "en" ? "Organic Matter" : "जैविक पदार्थ" },
-    { key: "total_nitrogen", label: language === "en" ? "Total Nitrogen" : "नाइट्रोजन" },
-    { key: "phosphorus", label: language === "en" ? "Phosphorus" : "फस्फोरस" },
-    { key: "boron", label: language === "en" ? "Boron" : "बोरोन" },
-    { key: "sand_clay_percentage", label: language === "en" ? "Sand/Clay %" : "बालुवा/माटो %" },
+    { key: "OrganicMatter", label: language === "np" ? "जैविक पदार्थ" : "Organic Matter" },
+    { key: "TotalNitrogen", label: language === "np" ? "नाइट्रोजन" : "Total Nitrogen" },
+    { key: "P2O5", label: language === "np" ? "फस्फोरस" : "Phosphorus" },
+    { key: "Boron", label: language === "np" ? "बोरोन" : "Boron" },
+    { key: "sand/clayPercentage", label: language === "np" ? "बालुवा/माटो %" : "Sand/Clay %" },
   ];
 
   return (

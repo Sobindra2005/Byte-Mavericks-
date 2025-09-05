@@ -11,6 +11,7 @@ import Player from './component/courses/player'
 import Signin from './component/signin'
 import Dashboard from './component/dashboard'
 import Community from './community/community'
+
 function App() {
   return (
     <>
