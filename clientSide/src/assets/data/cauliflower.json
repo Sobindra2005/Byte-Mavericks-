@@ -1,0 +1,219 @@
+[
+  {
+    "section": "Land Preparation",
+    "steps": [
+      {
+        "title": "STEP I",
+        "desc": {
+          "en": "Apply organic manure 1500 kg per ropani at least 15 days before transplanting seedlings in the main field.",
+          "np": "मुख्य खेतमा बिरुवा सार्नुभन्दा कम्तिमा १५ दिन अगाडि १५०० के.जी. गोठे मल प्रयोग गर्नुहोस्।"
+        },
+        "detail": {
+          "en": "This improves soil fertility and structure for better crop growth.",
+          "np": "यसले माटोको उर्वराशक्ति र बनावट सुधार गर्छ।"
+        }
+      },
+      {
+        "title": "STEP II",
+        "desc": {
+          "en": "Plough without much delay to mix OM in the soils. Plough 3 times to make soil pulverized. Level the field for further operations.",
+          "np": "गोठे मल माटोसँग राम्रोसँग मिसाउन ढिला नगरी जोत्नुहोस्। माटो राम्रोसँग च्याप्न ३ पटक जोत्नुहोस्। थप कामका लागि खेत सम्याउनुहोस्।"
+        },
+        "detail": {
+          "en": "Proper ploughing ensures even distribution of nutrients.",
+          "np": "राम्रो जोत्नाले पोषक तत्वहरू समान रूपमा वितरण हुन्छन्।"
+        }
+      }
+    ]
+  },
+  {
+    "section": "Nursery",
+    "steps": [
+      {
+        "title": "Step I",
+        "desc": {
+          "en": "SITE SELECTION",
+          "np": "नर्सरी स्थल चयन"
+        },
+        "detail": {
+          "en": "Choose a well-drained, sunny location for the nursery.",
+          "np": "नर्सरीका लागि राम्रो पानी नजम्ने, घाम लाग्ने स्थान छान्नुहोस्।"
+        }
+      },
+      {
+        "title": "Step II",
+        "desc": {
+          "en": "SOIL",
+          "np": "माटो"
+        },
+        "detail": {
+          "en": "Use fertile, loose soil for healthy seedling growth.",
+          "np": "स्वस्थ बिरुवा बढ्न उर्वर, फुस्रो माटो प्रयोग गर्नुहोस्।"
+        }
+      },
+      {
+        "title": "STEP III",
+        "desc": {
+          "en": "SIZE",
+          "np": "आकार"
+        },
+        "detail": {
+          "en": "Maintain proper nursery bed size for easy management.",
+          "np": "सजिलो व्यवस्थापनका लागि उचित नर्सरी बेडको आकार राख्नुहोस्।"
+        }
+      },
+      {
+        "title": "STEP IV",
+        "desc": {
+          "en": "OM and FERTILIZER",
+          "np": "गोठे मल र मल"
+        },
+        "detail": {
+          "en": "Mix organic manure and fertilizer well in the nursery soil.",
+          "np": "नर्सरी माटोमा गोठे मल र मल राम्रोसँग मिसाउनुहोस्।"
+        }
+      },
+      {
+        "title": "Step V",
+        "desc": {
+          "en": "SEED SOWING SPACING",
+          "np": "बीउ छर्ने दूरी"
+        },
+        "detail": {
+          "en": "Sow seeds at recommended spacing for healthy seedlings.",
+          "np": "स्वस्थ बिरुवाका लागि सिफारिस गरिएको दूरीमा बीउ छर्नुहोस्।"
+        }
+      },
+      {
+        "title": "Step VI",
+        "desc": {
+          "en": "NURSERY SHED TO PROTECT FROM HEAT",
+          "np": "तातोबाट जोगाउन नर्सरी छाना"
+        },
+        "detail": {
+          "en": "Provide shade to protect seedlings from excessive heat.",
+          "np": "बिरुवालाई अत्यधिक तातोबाट जोगाउन छाना बनाउनुहोस्।"
+        }
+      },
+      {
+        "title": "Step VII",
+        "desc": {
+          "en": "NURSERY TUNNEL TO PROTECT FROM COLD",
+          "np": "चिसोबाट जोगाउन नर्सरी टनेल"
+        },
+        "detail": {
+          "en": "Use tunnels to protect seedlings from cold weather.",
+          "np": "चिसो मौसमबाट जोगाउन टनेल प्रयोग गर्नुहोस्।"
+        }
+      }
+    ]
+  },
+  {
+    "section": "Transplanting",
+    "steps": [
+      {
+        "title": "STEP 1",
+        "desc": {
+          "en": "Cover the lower part of seedling which was inside the soil in the nursery.",
+          "np": "नर्सरीमा माटोभित्र रहेको बिरुवाको तल्लो भाग छोप्नुहोस्।"
+        },
+        "detail": {
+          "en": "This helps the plant establish well in the main field.",
+          "np": "यसले मुख्य खेतमा बिरुवा राम्रोसँग जम्न मद्दत गर्छ।"
+        }
+      },
+      {
+        "title": "STEP 2",
+        "desc": {
+          "en": "FOR EARLY VARIETY: Apply 5.3gm DAP and 3.4gm MOP in rings or spots per plant. FOR MID AND LATE VARIETY: Apply 7gm DAP and 4.5gm MOP in rings or spots per plant.",
+          "np": "छिटो पाक्ने जातका लागि: प्रति बिरुवा ५.३ ग्राम डिएपी र ३.४ ग्राम एमओपी घेरामा वा स्थानमा राख्नुहोस्। मध्य र ढिलो पाक्ने जातका लागि: प्रति बिरुवा ७ ग्राम डिएपी र ४.५ ग्राम एमओपी राख्नुहोस्।"
+        },
+        "detail": {
+          "en": "Proper fertilizer application boosts growth and yield.",
+          "np": "सही मल प्रयोगले वृद्धि र उत्पादन बढाउँछ।"
+        }
+      }
+    ]
+  },
+  {
+    "section": "Top Dressing",
+    "steps": [
+      {
+        "title": "Step I",
+        "desc": {
+          "en": "FIRST TOPDRESSING AT 30 DAYS AFTER TRANSPLANTING. Applied in ring around the plant or spot placement 5-7cm away from the plants. EARLY VARIETIES: Apply 3.4gm urea per plant both times.",
+          "np": "सारिएको ३० दिनपछि पहिलो टपड्रेसिङ गर्नुहोस्। बिरुवाको वरिपरि घेरामा वा ५-७ से.मी. टाढा मल राख्नुहोस्। छिटो पाक्ने जातका लागि: दुवै पटक ३.४ ग्राम युरिया प्रति बिरुवा राख्नुहोस्।"
+        },
+        "detail": {
+          "en": "Timely topdressing ensures healthy plant development.",
+          "np": "समयमै टपड्रेसिङले बिरुवा स्वस्थ बनाउँछ।"
+        }
+      },
+      {
+        "title": "Step II",
+        "desc": {
+          "en": "SECOND TOPDRESSING AT CURD FORMATION STAGE. MID & LATE VARIETIES: Apply 4.5gm urea per plant both times.",
+          "np": "फूल बन्ने समयमा दोस्रो टपड्रेसिङ गर्नुहोस्। मध्य र ढिलो पाक्ने जातका लागि: दुवै पटक ४.५ ग्राम युरिया प्रति बिरुवा राख्नुहोस्।"
+        },
+        "detail": {
+          "en": "Second topdressing is crucial for curd formation.",
+          "np": "फूल बन्नका लागि दोस्रो टपड्रेसिङ आवश्यक छ।"
+        }
+      }
+    ]
+  },
+  {
+    "section": "Harvesting",
+    "steps": [
+      {
+        "title": "Step 1",
+        "desc": {
+          "en": "Cauliflowers are harvested when curds are fully developed, compact and white. HARVESTING TIME: Early varieties: 65-75 days, Mid varieties: 90-100 days, Late varieties: 110-130 days.",
+          "np": "फूलगोभीको फूल राम्रोसँग बनेको, कडा र सेतो हुँदा टिप्नुपर्छ। टिप्ने समय: छिटो जात: ६५-७५ दिन, मध्य: ९०-१०० दिन, ढिलो: ११०-१३० दिन।"
+        },
+        "detail": {
+          "en": "Harvest at the right stage for best quality and yield.",
+          "np": "सही समयमा टिप्दा राम्रो गुणस्तर र उत्पादन पाइन्छ।"
+        }
+      },
+      {
+        "title": "Step 2",
+        "desc": {
+          "en": "The appropriate time to harvest cauliflowers is late morning to early afternoon.",
+          "np": "फूलगोभी टिप्न उपयुक्त समय बिहान ढिलोदेखि दिउँसोको सुरुमा हो।"
+        },
+        "detail": {
+          "en": "Avoid harvesting during wet or very hot periods.",
+          "np": "भिजेको वा धेरै तातो समयमा नटिप्नुहोस्।"
+        }
+      }
+    ]
+  },
+  {
+    "section": "Post Harvest",
+    "steps": [
+      {
+        "title": "SORTING",
+        "desc": {
+          "en": "DISEASED, PEST INFESTED, DEFORMED/DAMAGED",
+          "np": "रोग लागेको, किराले खाएको, बिग्रिएको/क्षतिग्रस्त"
+        },
+        "detail": {
+          "en": "Remove all damaged or diseased curds before storage.",
+          "np": "भण्डारण गर्नु अघि सबै बिग्रिएको वा रोग लागेको फूल हटाउनुहोस्।"
+        }
+      },
+      {
+        "title": "PACKAGING AND STORAGE",
+        "desc": {
+          "en": "The best container for cauliflower curds is a PLASTIC CRATE because of its smooth inside finish.",
+          "np": "फूलगोभीका लागि प्लास्टिक क्रेट सबैभन्दा राम्रो भाँडो हो किनभने यसको भित्री सतह चिल्लो हुन्छ।"
+        },
+        "detail": {
+          "en": "Store in a cool, dry place to maintain freshness.",
+          "np": "ताजगी कायम राख्न चिसो, सुक्खा स्थानमा राख्नुहोस्।"
+        }
+      }
+    ]
+  }
+]

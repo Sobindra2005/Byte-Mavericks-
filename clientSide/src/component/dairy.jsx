@@ -238,7 +238,6 @@ const Diary = () => {
 
   const investmentPlans = plans.filter((plan) => plan.type === "investment");
 
-  // Edit plan
   const handleUpdatePlan = () => {
     setPlans((prev) =>
       prev.map((plan, idx) =>
@@ -257,7 +256,7 @@ const Diary = () => {
     <div className="min-h-screen bg-[#f7f9fb] py-8 px-3">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <h1 className="text-2xl md:text-3xl font-bold text-green-900 mb-1 text-center">
+        <h1 className="text-2xl  font-bold text-green-900 mb-1 text-center">
           {useTextLang("Farm & Business Financial Diary", "कृषि तथा व्यवसायिक वित्तीय डायरी")}
         </h1>
         <p className="text-center text-gray-600 mb-8">
@@ -278,7 +277,7 @@ const Diary = () => {
                 <span className="font-semibold text-gray-600">{item.label}</span>
                 {item.icon}
               </div>
-              <div className={`text-2xl font-extrabold ${item.color}`}>
+              <div className={`text-2xl font-semibold ${item.color}`}>
                 {item.value < 0 ? "-" : ""}
                 {item.valuePrefix}
                 {Math.abs(item.value).toFixed(2)}
