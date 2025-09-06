@@ -9,6 +9,11 @@ const useStore = create((set) => ({
   sidebarOpen: false,
   toggleSidebar: () =>
     set((state) => ({ sidebarOpen: !state.sidebarOpen })),
+
+  detectionResult: null,
+
+  setDetectionResult: (result) => set(() => ({ detectionResult: result })),
+  clearDetectionResult: () => set(() => ({ detectionResult: null })),
 }));
 
 export default useStore;

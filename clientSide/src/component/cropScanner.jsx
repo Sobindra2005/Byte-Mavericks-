@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import useStore from "../store"; // Import your store
 
 export default function CameraCapture({onClose}) {
     const videoRef = useRef(null);
@@ -10,6 +11,8 @@ export default function CameraCapture({onClose}) {
     const [isLoading, setLoading] = useState(false);
     const [result, setResult] = useState(null);
     const navigate = useNavigate();
+    
+    const setDetectionResult = useStore((state) => state.setDetectionResult);
 
     useEffect(() => {
         async function startCamera() {
@@ -42,17 +45,25 @@ export default function CameraCapture({onClose}) {
     const handleUpload = (e) => {
         const file = e.target.files[0];
         if (!file) return;
-        setCapturedImage(URL.createObjectURL(file));
+        const imageUrl = URL.createObjectURL(file);
+        setCapturedImage(imageUrl);
         sendToApi(file);
     };
 
     const handleRetake = () => {
         setCapturedImage(null);
+        setResult(null);
     };
 
     const handleButtonClick = () => {
         fileInputRef.current.click();
-    }
+    };
+
+    const handleConfirm = () => {
+        if (capturedImage && typeof capturedImage === 'string' && capturedImage.startsWith('data:')) {
+            sendToApi(capturedImage);
+        }
+    };
 
     const sendToApi = async (imgInput) => {
         setLoading(true);
@@ -85,23 +96,35 @@ export default function CameraCapture({onClose}) {
                 headers: { "Content-Type": "multipart/form-data" },
             });
 
-            const data = res.data;
-
+            const data = res.data.ai;
             if (!data) {
                 setResult({ error: "No response from server." });
-            } else {
-                setResult(data.ai || data);
+                setLoading(false);
+                return;
             }
-            setLoading(false);
+
+            setDetectionResult(data);
+            setResult(data.ai || data);
+            
             navigate("/disease-detection");
             onClose();
+
         } catch (error) {
             console.error("API Error:", error);
             setResult({ error: "Failed to connect to server." });
+            setLoading(false);
         }
-
-        setLoading(false);
     };
+
+    // Clean up camera stream when component unmounts
+    useEffect(() => {
+        return () => {
+            if (videoRef.current && videoRef.current.srcObject) {
+                const tracks = videoRef.current.srcObject.getTracks();
+                tracks.forEach(track => track.stop());
+            }
+        };
+    }, []);
 
     return (
         <div className="fixed inset-0 bg-black/90  flex items-center justify-center z-50">
@@ -122,12 +145,14 @@ export default function CameraCapture({onClose}) {
                                 className="rounded-lg object-contain h-[70%] w-[70%]"
                             />
                             {/* Scanning animation overlay */}
-                            <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
-                                <div className="w-[90%] h-[100%] relative">
-                                    {/* Animated scanning bar */}
-                                    <div className="absolute left-0 w-full h-1 bg-green-400 rounded shadow-lg animate-scan-bar" />
+                            {isLoading && (
+                                <div className="absolute inset-0 flex items-center justify-center pointer-events-none">
+                                    <div className="w-[90%] h-[100%] relative">
+                                        {/* Animated scanning bar */}
+                                        <div className="absolute left-0 w-full h-1 bg-green-400 rounded shadow-lg animate-scan-bar" />
+                                    </div>
                                 </div>
-                            </div>
+                            )}
                             <style>
                                 {`
                                     @keyframes scan-bar {
@@ -149,39 +174,57 @@ export default function CameraCapture({onClose}) {
                             <button
                                 onClick={capturePhoto}
                                 className="px-6 py-2 bg-blue-600 text-white rounded-full shadow hover:bg-blue-700 transition"
+                                disabled={isLoading}
                             >
                                 Capture
                             </button>
                             <button
                                 className="px-6 py-2 bg-green-600 text-white rounded-full shadow hover:bg-green-700 transition"
                                 onClick={handleButtonClick}
+                                disabled={isLoading}
                             >
                                 Upload
-
                                 <input
                                     ref={fileInputRef}
                                     className="hidden w-full h-full"
                                     type="file"
                                     accept="image/*"
-                                    onClick={handleUpload}
+                                    onChange={handleUpload}
                                 />
-
                             </button>
                         </>
-
                     ) : (
                         <>
                             <button
                                 onClick={handleRetake}
-                                className="px-4 bg-blue-400 py-2 text-gray-800 rounded-full shadow hover:bg-gray-400 transition"
+                                className="px-4 bg-gray-400 py-2 text-white rounded-full shadow hover:bg-gray-500 transition"
+                                disabled={isLoading}
                             >
                                 Retake
                             </button>
-
+                            {!result && !isLoading && (
+                                <button
+                                    onClick={handleConfirm}
+                                    className="px-6 py-2 bg-green-600 text-white rounded-full shadow hover:bg-green-700 transition"
+                                >
+                                    Analyze
+                                </button>
+                            )}
+                            {isLoading && (
+                                <div className="px-6 py-2 text-gray-600">
+                                    Analyzing...
+                                </div>
+                            )}
                         </>
                     )}
+                    <button
+                        onClick={onClose}
+                        className="px-4 py-2 bg-red-500 text-white rounded-full shadow hover:bg-red-600 transition"
+                    >
+                        Close
+                    </button>
                 </div>
             </div>
         </div>
-    )
+    );
 };
