@@ -14,37 +14,37 @@ import useStore from "../store";
 const menuItems = [
   {
     to: "/courses",
-    icon: <HiOutlineBookOpen size={24} />,
+    icon: <HiOutlineBookOpen size={34} />,
     en: "Course",
     np: "पाठ्यक्रम",
   },
   {
     to: "/diary",
-    icon: <HiOutlineClipboardDocumentList size={24} />,
+    icon: <HiOutlineClipboardDocumentList size={34} />,
     en: "Business Diary",
     np: "व्यवसाय डायरी",
   },
   {
     to: "/regional-crops",
-    icon: <HiOutlineGlobeAlt size={24} />,
+    icon: <HiOutlineGlobeAlt size={34} />,
     en: "Regional Crops",
     np: "क्षेत्रीय बाली",
   },
   {
     to: "/market",
-    icon: <HiOutlineChartBar size={24} />,
+    icon: <HiOutlineChartBar size={34} />,
     en: "Market Trend",
     np: "बजार प्रवृत्ति",
   },
   {
     to: "/community",
-    icon: <HiOutlineUsers size={24} />,
+    icon: <HiOutlineUsers size={34} />,
     en: "Expert Advice",
     np: "विशेषज्ञ सल्लाह",
   },
   {
     to: "/user",
-    icon: <HiOutlineUserCircle size={24} />,
+    icon: <HiOutlineUserCircle size={34} />,
     en: "User Profile",
     np: "प्रयोगकर्ता प्रोफाइल",
   },
@@ -69,7 +69,7 @@ export default function Sidebar() {
           className="hidden px-3 md:block mb-4 focus:outline-none text-gray-700 hover:text-emerald-700 transition-colors"
           aria-label="Toggle sidebar"
         >
-          {sidebarOpen ? <FiX size={22} /> : <FiMenu size={22} />}
+          {sidebarOpen ? <FiX size={30} /> : <FiMenu size={30} />}
         </button>
         {menuItems.map((item, idx) => {
           const isActive = location.pathname.startsWith(item.to);

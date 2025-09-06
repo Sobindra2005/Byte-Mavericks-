@@ -117,8 +117,14 @@ export default function Expert({ handleSubmit, formData, setFormData }) {
       {isModalOpen && (
         <div className="fixed z-50 inset-0 bg-black bg-opacity-50 flex items-center justify-center transition-all">
           <div className="bg-white rounded-2xl p-8 max-w-lg w-full mx-4 shadow-2xl border-t-4 border-green-500 relative animate-fadeIn">
-            <form onSubmit={(e) => handleSubmit(e)}>
-              <h3 className="font-bold text-2xl text-center mb-6 text-green-700">
+            <form 
+  onSubmit={(e) => {
+    e.preventDefault(); 
+    handleSubmit(e); 
+    setFormData({ name: "", email: "", problem: "" });
+    setModalOpen(false);
+  }}
+>  <h3 className="font-bold text-2xl text-center mb-6 text-green-700">
                 
                 {language === "np"
                   ? "🌱 आफ्नो प्रश्न सोध्नुहोस्"
@@ -141,8 +147,8 @@ export default function Expert({ handleSubmit, formData, setFormData }) {
                   onChange={(e) =>
                     setFormData({ ...formData, email: e.target.value })
                   }
-                  placeholder={language === "np" ? "आफ्नो ईमेल" : "Your Email"}
-                  type="email"
+                  placeholder={language === "np" ? "आफ्नो फोन नम्बर" : "Your Phone Number"}
+                  type="number"
                   required
                 />
               </div>
