@@ -116,7 +116,6 @@ export default function CameraCapture({onClose}) {
         }
     };
 
-    // Clean up camera stream when component unmounts
     useEffect(() => {
         return () => {
             if (videoRef.current && videoRef.current.srcObject) {

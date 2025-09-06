@@ -28,7 +28,7 @@ const DiseaseDetection = () => {
     <div className="w-full mx-auto bg-white rounded-xl shadow-lg p-6 mt-6">
       <div className="flex items-center gap-4 mb-4">
         <div className="bg-green-100 rounded-full w-14 h-14 flex items-center justify-center text-3xl font-bold text-green-700 shadow">
-          {response?.crop === "Corn" ? "🌽" : "🌾"}
+          {response?.emoji}
         </div>
         <div>
           <div className="text-xl font-bold text-green-800">

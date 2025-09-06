@@ -47,6 +47,7 @@ The response must be structured in JSON format like this:
 {
 "flag":<false (if there is disease else true)>
   "crop": "<crop name>",
+  "emoji": "<appropriate emoji for the crop>",
   "disease": "<disease name>",
   "confidence": "<percentage>",
   "english": {
