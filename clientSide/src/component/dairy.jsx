@@ -144,7 +144,7 @@ const Diary = () => {
   const summary = [
     {
       label: netProfitLabel,
-      value: 100,
+      value: 23000,
       desc: netProfitDesc,
       icon: <span className="inline-block text-green-600">&#8593;</span>,
       color: "text-green-600",
@@ -154,7 +154,7 @@ const Diary = () => {
     },
     {
       label: totalRevenueLabel,
-      value: 100,
+      value: 33000,
       desc: totalRevenueDesc,
       icon: <span className="inline-block text-green-600">Rs</span>,
       color: "text-green-600",
@@ -164,7 +164,7 @@ const Diary = () => {
     },
     {
       label: totalExpensesLabel,
-      value: 0,
+      value: 10000,
       desc: totalExpensesDesc,
       icon: <span className="inline-block text-green-600">&#128179;</span>,
       color: "text-green-600",
@@ -174,10 +174,10 @@ const Diary = () => {
     },
     {
       label: investmentPLLabel,
-      value: -3,
+      value: 23000,
       desc: investmentPLDesc,
-      icon: <span className="inline-block text-red-600">&#8595;</span>,
-      color: "text-red-600",
+      icon: <span className="inline-block text-green-600">&#8595;</span>,
+      color: "text-green-600",
       border: "border-red-100",
       bg: "bg-white",
       valuePrefix: rsLabel,

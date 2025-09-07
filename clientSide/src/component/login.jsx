@@ -26,6 +26,7 @@ const Login = () => {
               <label
                 htmlFor="email"
                 className="font-bold block mb-1 text-green-900"
+              
               >
                 Email:
               </label>
@@ -36,6 +37,7 @@ const Login = () => {
                   id="email"
                   className="bg-white/20 border font-medium border-white/50 w-full p-2 pl-10 rounded font-bold text-green-900 placeholder-green-800 focus:outline-none focus:ring-2 focus:ring-green-700"
                   placeholder="Enter your email..."
+                   value="saksham@gmail.com"
                 />
               </div>
             </div>
@@ -54,6 +56,7 @@ const Login = () => {
                   id="password"
                   className="bg-white/20 border font-medium border-white/50 w-full p-2 pl-10 rounded font-bold text-green-900 placeholder-green-800 focus:outline-none focus:ring-2 focus:ring-green-700"
                   placeholder="Enter your password..."
+                    value="saksham@gmail.com"
                 />
               </div>
             </div>
