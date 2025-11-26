@@ -3,7 +3,7 @@ import Datas from './Data.js';
 import { Link } from 'react-router-dom';
 import Barley from '../../assets/crops-image/Barley.jpg';
 import Cardamom from '../../assets/crops-image/Cardamom.jpg';
-import Corn from '../../assets/crops-image/Corn.jpg';
+import Corn from '../../assets/crops-image/corn.jpg';
 import Millet from '../../assets/crops-image/Millet.jpg';
 import Potato from '../../assets/crops-image/potato.jpg';
 import Tea from '../../assets/crops-image/tea.jpg';

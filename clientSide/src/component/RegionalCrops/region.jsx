@@ -125,14 +125,11 @@ export default function Region({ onFetchCrops }) {
         console.error("Error getting location", error);
       }
     );
-
-
   }, []);
 
   const language = useStore((state) => state.language);
 
   const handleClickOnCrop = (crop) => {
-    console.log("current crops is :", crop)
     if (crop.includes('Cauliflower')) {
       navigate('/courses/player/cauliflower-farming')
     }
@@ -147,7 +144,6 @@ export default function Region({ onFetchCrops }) {
       { headers: { "Content-Type": "application/json" } }
     );
     setFetchCrops(res.data);
-    console.log(res.data);
     setLoading(false);
   };
 
