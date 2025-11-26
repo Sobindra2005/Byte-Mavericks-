@@ -1,5 +1,6 @@
 import React from "react";
 import { FaPhoneAlt, FaEnvelope, FaStore } from "react-icons/fa";
+import { useTextLang } from "../libs/utils";
 
 export default function RetailerCard({ retailer }) {
   return (
@@ -33,7 +34,7 @@ export default function RetailerCard({ retailer }) {
 
       {/* Connect Button */}
       <button className="mt-4 bg-green-600 text-white py-2 rounded hover:bg-green-700">
-        Connect with Retailer
+        {useTextLang("Connect with Retailer", "खुद्रा विक्रेतासँग जोड्नुहोस्")}
       </button>
     </div>
   );

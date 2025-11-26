@@ -1,6 +1,7 @@
 import React from "react";
 import RetailerCard from "./RetailerCard";
 import { useState } from "react";
+import { useTextLang } from "../libs/utils";
 
 const rtls = [
   {
@@ -30,7 +31,7 @@ const rtls = [
     phone: "9800000003",
     image: "https://source.unsplash.com/400x300/?warehouse,trade"
   },
-    {
+  {
     id: 4,
     name: "Krishi Nepal",
     type: "Export & Wholesale",
@@ -39,7 +40,7 @@ const rtls = [
     phone: "9800000004",
     image: "https://source.unsplash.com/400x300/?warehouse,trade"
   },
-    {
+  {
     id: 5,
     name: "Sovit Kumar Shrestha",
     type: "Grocery and Vegetables",
@@ -48,7 +49,7 @@ const rtls = [
     phone: "9800000005",
     image: "https://source.unsplash.com/400x300/?warehouse,trade"
   },
-    {
+  {
     id: 6,
     name: "Saksham Phuyal",
     type: "Mini Market",
@@ -60,7 +61,7 @@ const rtls = [
 ];
 
 export default function Marketplace() {
-    const [retailers, setRetailers] = useState(rtls)
+  const [retailers, setRetailers] = useState(rtls)
   return (
     <div className="min-h-screen bg-green-50">
       {/* Navbar */}
@@ -78,16 +79,16 @@ export default function Marketplace() {
 
       {/* Hero Section */}
       <header className="bg-green-600 text-white py-12 text-center">
-        <h2 className="text-4xl font-bold">Connect with Retailers</h2>
+        <h2 className="text-4xl font-bold">{useTextLang("Connect with Retailers", "खुद्रा विक्रेताहरूसँग जोड्नुहोस्")}</h2>
         <p className="mt-2 text-lg">
-          Farmers can directly reach retailers & build partnerships
+          {useTextLang("Farmers can directly reach retailers & build partnerships", "किसानहरूले सिधै खुद्रा विक्रेताहरूसम्म पुग्न र साझेदारी निर्माण गर्न सक्छन्")}
         </p>
       </header>
 
       {/* Retailer Cards */}
       <main className="p-8">
         <h3 className="text-2xl font-semibold text-green-700 mb-6">
-          Available Retailers
+          {useTextLang("Available Retailers", "उपलब्ध खुद्रा विक्रेताहरू")}
         </h3>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6">
           {retailers.map((retailer) => (

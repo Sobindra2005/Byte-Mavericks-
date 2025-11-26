@@ -6,6 +6,7 @@ import axios from "axios";
 import { FaCheckCircle, FaExclamationTriangle, FaInfoCircle } from "react-icons/fa";
 import useStore from "../../store";
 import { useNavigate } from "react-router-dom";
+import { useTextLang } from "../../libs/utils";
 
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
@@ -111,7 +112,7 @@ export default function Region({ onFetchCrops }) {
   const [markerDetails, setMarkerDetails] = useState(null);
   const [fetchCrops, setFetchCrops] = useState(null);
   const [loading, setLoading] = useState(false);
-  const navigate=useNavigate();
+  const navigate = useNavigate();
 
   useEffect(() => {
     navigator.geolocation.getCurrentPosition(
@@ -131,10 +132,10 @@ export default function Region({ onFetchCrops }) {
   const language = useStore((state) => state.language);
 
   const handleClickOnCrop = (crop) => {
-    console.log("current crops is :",crop)
-   if(crop.includes('Cauliflower')){
-    navigate('/courses/player/cauliflower-farming')
-   }
+    console.log("current crops is :", crop)
+    if (crop.includes('Cauliflower')) {
+      navigate('/courses/player/cauliflower-farming')
+    }
   };
 
   const fetchDataOnMarkerChange = async (placeName) => {
@@ -163,10 +164,10 @@ export default function Region({ onFetchCrops }) {
                 <circle cx="12" cy="9" r="2.5" />
               </svg>
             </span>
-            <h2 className="text-lg font-bold text-gray-800">स्थान चयन गर्नुहोस्</h2>
+            <h2 className="text-lg font-bold text-gray-800">{useTextLang("Select Location", "स्थान चयन गर्नुहोस्")}</h2>
           </div>
           <p className="text-gray-600 mb-3 text-sm">
-            तपाईंको क्षेत्रको लागि उपयुक्त बाली सुझावहरू प्राप्त गर्न स्थान चयन गर्नुहोस्
+            {useTextLang("Select a location to get suitable crop suggestions for your area", "तपाईंको क्षेत्रको लागि उपयुक्त बाली सुझावहरू प्राप्त गर्न स्थान चयन गर्नुहोस्")}
           </p>
           <div className="rounded-xl overflow-hidden border border-green-200">
             <MapContainer center={mapCenter} zoom={10} className="h-64 w-full z-10">
@@ -192,7 +193,7 @@ export default function Region({ onFetchCrops }) {
             </MapContainer>
           </div>
           <div className="text-center mt-2 text-gray-700 font-medium">
-            Interactive Map <span className="block text-xs text-gray-500">नेपालको नक्सा</span>
+            {useTextLang("Interactive Map", "अन्तरक्रियात्मक नक्सा")} <span className="block text-xs text-gray-500">{useTextLang("Map of Nepal", "नेपालको नक्सा")}</span>
           </div>
         </div>
         {/* Location Info Card */}
@@ -220,7 +221,7 @@ export default function Region({ onFetchCrops }) {
               <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
               <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
             </svg>
-            <span className="text-green-700 font-semibold">Loading soil Data...</span>
+            <span className="text-green-700 font-semibold">{useTextLang("Loading soil Data...", "माटोको डाटा लोड हुँदैछ...")}</span>
           </div>
         )}
 
@@ -243,11 +244,11 @@ export default function Region({ onFetchCrops }) {
               </svg>
             </span>
             <h2 className="text-lg font-bold text-gray-800">
-              {markerDetails?.details?.name || "काठमाडौँ"} को लागि बाली सुझावहरू
+              {useTextLang(`Crop suggestions for ${markerDetails?.details?.name || "Kathmandu"}`, `${markerDetails?.details?.name || "काठमाडौँ"} को लागि बाली सुझावहरू`)}
             </h2>
           </div>
           <p className="text-gray-600 mb-4 text-sm">
-            स्थानीय मौसम र माटोको अवस्था अनुसार सिफारिस गरिएका बालीहरू
+            {useTextLang("Recommended crops based on local weather and soil conditions", "स्थानीय मौसम र माटोको अवस्था अनुसार सिफारिस गरिएका बालीहरू")}
           </p>
           {loading && (
             <div className="flex flex-col items-center justify-center py-8">
@@ -255,7 +256,7 @@ export default function Region({ onFetchCrops }) {
                 <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4"></circle>
                 <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v8z"></path>
               </svg>
-              <span className="text-green-700 font-semibold">Loading crop suggestions...</span>
+              <span className="text-green-700 font-semibold">{useTextLang("Loading crop suggestions...", "बाली सुझावहरू लोड हुँदैछ...")}</span>
             </div>
           )}
           {/* Sample Crop Suggestion Cards */}
@@ -266,16 +267,16 @@ export default function Region({ onFetchCrops }) {
                 <svg className="h-12 w-12 text-gray-300 mb-2" fill="none" stroke="currentColor" strokeWidth="1.5" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                 </svg>
-                <span className="text-gray-500 font-semibold text-lg">No crop suggestions found for this location.</span>
+                <span className="text-gray-500 font-semibold text-lg">{useTextLang("No crop suggestions found for this location.", "यस स्थानको लागि कुनै बाली सुझाव फेला परेन।")}</span>
               </div>
             )}
 
             {/* Crop Suggestions */}
             {!loading && fetchCrops?.recommended_agri_business && fetchCrops.recommended_agri_business.length > 0 && (
-              <div  className="sticky top-0 flex flex-col gap-4 cursor-pointer">
+              <div className="sticky top-0 flex flex-col gap-4 cursor-pointer">
                 {fetchCrops.recommended_agri_business.map((crop, idx) => {
                   return (
-                    <div onClick={()=>handleClickOnCrop(crop.name)} key={idx} className="bg-gray-50 rounded-xl border-l-4 border-green-400 p-4 shadow-sm">
+                    <div onClick={() => handleClickOnCrop(crop.name)} key={idx} className="bg-gray-50 rounded-xl border-l-4 border-green-400 p-4 shadow-sm">
                       <div className="flex items-center justify-between mb-1">
                         <span className="font-bold text-lg text-gray-800">{crop.name}</span>
                         <span className="bg-green-100 text-green-700 px-3 py-1 rounded-full text-xs font-semibold">

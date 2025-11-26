@@ -10,22 +10,18 @@ export default function Player() {
   const { id } = useParams();
   const data = Datas.find((item) => item.id === id);
 
-  
-
-
   if (!data) {
-    return <div>Data not found.</div>;
+
+    return <div className="flex justify-center items-center h-screen">Data not found.</div>;
   }
-
-
   return (
     <>
       <div className="max-w-3xl mx-auto px-4 py-8">
         <div className="bg-white rounded-2xl shadow-lg p-6 flex flex-col items-center">
-          <h1 className="mb-4 text-center font-bold text-3xl text-green-800">{data.title}</h1>
+          <h1 className="mb-4 text-center font-bold text-3xl text-green-800">{useTextLang(data.title_en, data.title)}</h1>
           <img src={data.thumbnail} alt={data.title} className="w-full max-w-md h-64 object-cover rounded-xl shadow mb-6" />
           <div className="w-full">
-            <h2 className="text-xl font-bold text-green-700 mb-3">यहाँ भिडियोको मुख्य बुँदाहरू छन्:</h2>
+            <h2 className="text-xl font-bold text-green-700 mb-3">{useTextLang("Here are the main points of the video:", "यहाँ भिडियोको मुख्य बुँदाहरू छन्:")}</h2>
             <ul className="list-disc list-inside mb-6 space-y-3 pl-4">
               {data.features && data.features.map((feature, index) => (
                 <li key={index} className="text-gray-800 text-base">{feature}</li>
@@ -43,9 +39,9 @@ export default function Player() {
         </div>
       </div>
       <div className="max-w-3xl mx-auto px-4">
-        <Part/>
-        <Review/>
-        <ReviewForm/>
+        <Part />
+        <Review />
+        <ReviewForm />
       </div>
     </>
   );

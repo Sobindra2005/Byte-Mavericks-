@@ -9,16 +9,16 @@ import RegionalCrops from './component/RegionalCrops/regionalCrops'
 import Course from './component/courses/course'
 import Player from './component/courses/player'
 import Signin from './component/signin'
-import Dashboard from './component/dashboard'
 import Community from './community/community'
 import HowToPlant from './component/courses/HowToPlant'
 import DiseaseDetection from './component/DiseaseDetection'
 
 import Marketplace from './component/Marketplace'
+import NotFound from './component/NotFound'
 function App() {
   return (
     <>
-       <MainLayout>
+      <MainLayout>
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/login" element={<Login />} />
@@ -27,15 +27,13 @@ function App() {
           <Route path="/courses" element={<Course />} />
           <Route path="/courses/player/:id" element={<Player />} />
           <Route path="/courses/player/:id/cultivation" element={<HowToPlant />} />
-          <Route path="/signin" element={<Signin/>}/>
-          <Route path="/dashboard" element={<Dashboard/>}/>
-          <Route path="/community" element={<Community/>} />
-          <Route path="/disease-detection" element={<DiseaseDetection/>} />
-
-          <Route path="/market" element={< Marketplace/>} />
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/community" element={<Community />} />
+          <Route path="/disease-detection" element={<DiseaseDetection />} />
+          <Route path="*" element={<NotFound />} />
         </Routes>
-      </MainLayout> 
-        
+      </MainLayout>
+
     </>
   )
 }

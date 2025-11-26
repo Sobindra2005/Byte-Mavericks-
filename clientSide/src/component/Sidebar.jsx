@@ -31,12 +31,6 @@ const menuItems = [
     np: "क्षेत्रीय बाली",
   },
   {
-    to: "/market",
-    icon: <HiOutlineChartBar size={34} />,
-    en: "Market Trend",
-    np: "बजार प्रवृत्ति",
-  },
-  {
     to: "/community",
     icon: <HiOutlineUsers size={34} />,
     en: "Expert Advice",

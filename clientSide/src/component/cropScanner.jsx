@@ -2,8 +2,9 @@ import axios from "axios";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import useStore from "../store"; // Import your store
+import { useTextLang } from "../libs/utils";
 
-export default function CameraCapture({onClose}) {
+export default function CameraCapture({ onClose }) {
     const videoRef = useRef(null);
     const canvasRef = useRef(null);
     const fileInputRef = useRef(null);
@@ -11,7 +12,7 @@ export default function CameraCapture({onClose}) {
     const [isLoading, setLoading] = useState(false);
     const [result, setResult] = useState(null);
     const navigate = useNavigate();
-    
+
     const setDetectionResult = useStore((state) => state.setDetectionResult);
 
     useEffect(() => {
@@ -105,7 +106,7 @@ export default function CameraCapture({onClose}) {
 
             setDetectionResult(data);
             setResult(data.ai || data);
-            
+
             navigate("/disease-detection");
             onClose();
 
@@ -175,14 +176,14 @@ export default function CameraCapture({onClose}) {
                                 className="px-6 py-2 bg-blue-600 text-white rounded-full shadow hover:bg-blue-700 transition"
                                 disabled={isLoading}
                             >
-                                Capture
+                                {useTextLang("Capture", "फोटो खिच्नुहोस्")}
                             </button>
                             <button
                                 className="px-6 py-2 bg-green-600 text-white rounded-full shadow hover:bg-green-700 transition"
                                 onClick={handleButtonClick}
                                 disabled={isLoading}
                             >
-                                Upload
+                                {useTextLang("Upload", "अपलोड गर्नुहोस्")}
                                 <input
                                     ref={fileInputRef}
                                     className="hidden w-full h-full"
@@ -199,19 +200,19 @@ export default function CameraCapture({onClose}) {
                                 className="px-4 bg-gray-400 py-2 text-white rounded-full shadow hover:bg-gray-500 transition"
                                 disabled={isLoading}
                             >
-                                Retake
+                                {useTextLang("Retake", "पुन: खिच्नुहोस्")}
                             </button>
                             {!result && !isLoading && (
                                 <button
                                     onClick={handleConfirm}
                                     className="px-6 py-2 bg-green-600 text-white rounded-full shadow hover:bg-green-700 transition"
                                 >
-                                    Analyze
+                                    {useTextLang("Analyze", "विश्लेषण गर्नुहोस्")}
                                 </button>
                             )}
                             {isLoading && (
                                 <div className="px-6 py-2 text-gray-600">
-                                    Analyzing...
+                                    {useTextLang("Analyzing...", "विश्लेषण गर्दै...")}
                                 </div>
                             )}
                         </>
@@ -220,7 +221,7 @@ export default function CameraCapture({onClose}) {
                         onClick={onClose}
                         className="px-4 py-2 bg-red-500 text-white rounded-full shadow hover:bg-red-600 transition"
                     >
-                        Close
+                        {useTextLang("Close", "बन्द गर्नुहोस्")}
                     </button>
                 </div>
             </div>

@@ -7,6 +7,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import axios from "axios";
 import ReactMarkdown from "react-markdown";
 import CameraCapture from "./cropScanner";
+import { useTextLang } from "../libs/utils";
 
 const ChatPopup = ({ onClose }) => {
   const [messages, setMessages] = useState([
@@ -15,6 +16,7 @@ const ChatPopup = ({ onClose }) => {
   const [input, setInput] = useState("cauliflower ma kalo dag aako thiyo k ley hola ");
   const [loading, setLoading] = useState(false);
   const messagesEndRef = useRef(null);
+  const errorMsg = useTextLang("Failed to get response from AI.", "AI बाट प्रतिक्रिया प्राप्त गर्न असफल भयो।");
 
   // Scroll to bottom on new message
   React.useEffect(() => {
@@ -47,7 +49,7 @@ const ChatPopup = ({ onClose }) => {
     } catch (err) {
       setMessages((msgs) => [
         ...msgs,
-        { from: "ai", text: "Failed to get response from AI." },
+        { from: "ai", text: errorMsg },
       ]);
     }
     setLoading(false);
@@ -66,7 +68,7 @@ const ChatPopup = ({ onClose }) => {
       }}
     >
       <div className="flex items-center justify-between px-4 py-3 bg-green-700 text-white rounded-tl-2xl">
-        <span className="font-bold text-lg">कृषि च्याट</span>
+        <span className="font-bold text-lg">{useTextLang("Agro Chat", "कृषि च्याट")}</span>
         <button
           onClick={onClose}
           className="text-white text-2xl font-bold hover:text-green-300"
@@ -108,13 +110,13 @@ const ChatPopup = ({ onClose }) => {
         ))}
         <div ref={messagesEndRef} />
         {loading && (
-          <div className="text-green-600 text-sm">AI is typing...</div>
+          <div className="text-green-600 text-sm">{useTextLang("AI is typing...", "AI लेख्दैछ...")}</div>
         )}
       </div>
       <form className="p-3 flex gap-2 border-t bg-white" onSubmit={sendMessage}>
         <input
           type="text"
-          placeholder="यहाँ लेख्नुहोस्..."
+          placeholder={useTextLang("Write here...", "यहाँ लेख्नुहोस्...")}
           className="flex-1 border rounded-full px-4 py-2 focus:outline-none"
           value={input}
           onChange={(e) => setInput(e.target.value)}
@@ -125,7 +127,7 @@ const ChatPopup = ({ onClose }) => {
           className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded-full font-semibold"
           disabled={loading}
         >
-          पठाउनुहोस्
+          {useTextLang("Send", "पठाउनुहोस्")}
         </button>
       </form>
     </motion.div>
